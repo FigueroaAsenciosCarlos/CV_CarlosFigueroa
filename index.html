@@ -3,88 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Interactivo Avanzado - Carlos Figueroa Asencios</title>
+    <title>CV Interactivo - Carlos Figueroa Asencios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
         }
+        
         .section-title {
-            font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem; border-bottom: 2px solid #3b82f6; color: #1e293b;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            color: var(--text);
         }
-        .experience-item {
-            background-color: white; border: 1px solid #e2e8f0;
-            padding: 1rem; border-radius: 0.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+        
+        .experience-item, .achievement-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
-        .experience-item:hover {
+        
+        .experience-item:hover, .achievement-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
+        
+        .experience-item.highlight {
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        
         .timeline {
-            position: relative; padding: 2rem 0;
+            position: relative;
+            padding: 2rem 0;
         }
+        
         .timeline::before {
-            content: ''; position: absolute; top: 0; left: 18px;
-            height: 100%; width: 4px; background: #cbd5e1;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 18px;
+            height: 100%;
+            width: 4px;
+            background: #cbd5e1;
         }
+        
         .timeline-item {
-            position: relative; margin-bottom: 2rem; padding-left: 3rem;
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 3rem;
         }
+        
         .timeline-dot {
-            content: ''; position: absolute; left: 9px; top: 5px;
-            height: 20px; width: 20px; background: white;
-            border: 4px solid #3b82f6; border-radius: 50%; z-index: 1;
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 5px;
+            height: 20px;
+            width: 20px;
+            background: var(--card-bg);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            z-index: 1;
         }
+        
         .chart-container {
-            background-color: white; padding: 1rem;
-            border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
         }
+        
         .skill-gallery {
-            display: flex; flex-wrap: wrap; justify-content: center;
-            align-items: center; gap: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
         }
+        
         .skill-tag {
-            padding: 0.5rem 1rem; border-radius: 0.5rem;
-            background-color: #eef2ff; color: #4338ca;
-            font-weight: 600; transition: transform 0.2s, background-color 0.2s;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: #eef2ff;
+            color: #4338ca;
+            font-weight: 600;
+            transition: transform 0.2s, background-color 0.2s;
             border: 1px solid #c7d2fe;
         }
+        
         .skill-tag:hover { 
             transform: translateY(-2px);
             background-color: #c7d2fe;
         }
+        
         .nav-menu a {
-            display: block; padding: 0.75rem 1rem;
-            background-color: white; border: 1px solid #e2e8f0;
-            border-radius: 0.5rem; text-align: center;
-            font-weight: 600; color: #3b82f6;
+            display: block;
+            padding: 0.75rem 1rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
             transition: all 0.2s;
         }
+        
         .nav-menu a:hover {
-            background-color: #3b82f6; color: white;
-            transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         
-        /* Print Styles */
+        .contact-card {
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .filter-active {
+            border-left: 3px solid var(--primary);
+            padding-left: 0.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            color: white;
+        }
+        
+        .contact-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .email-icon {
+            background: linear-gradient(135deg, #ea4335, #fbbc05);
+        }
+        
+        .linkedin-icon {
+            background: linear-gradient(135deg, #0a66c2, #00a0dc);
+        }
+        
+        .whatsapp-icon {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+        }
+        
+        .metric-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background-color: #f1f5f9;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-toggle button {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .metric-toggle button.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .section-title { font-size: 1.3rem; }
+            .nav-menu { grid-template-columns: repeat(2, 1fr); }
+            .chart-container { margin-bottom: 1.5rem; }
+            .header-buttons { flex-direction: column; gap: 0.5rem; }
+            .contact-icons { flex-direction: column; gap: 1.5rem; }
+            .metric-toggle { flex-direction: column; }
+        }
+        
         @media print {
             body { background-color: white; }
             .no-print { display: none !important; }
             #main-content { margin-top: 0; }
-            .experience-item, .section, .bg-white {
-                box-shadow: none !important; border: 1px solid #ccc !important;
+            .experience-item, .section, .achievement-item {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
                 page-break-inside: avoid;
             }
             .section-title {
-                color: black; border-color: #999;
+                color: black;
+                border-color: #999;
                 font-size: 16pt;
             }
             a { text-decoration: none; color: #333; }
@@ -92,24 +242,84 @@
     </style>
 </head>
 <body class="text-slate-800">
-
     <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
-        
         <header class="relative text-center mb-10">
             <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Carlos Figueroa Asencios</h1>
             <p class="mt-2 text-lg text-blue-600 font-medium">Economista especializado en Planificación Estratégica | Gestión Social | Analítica Avanzada de Datos | GenAI</p>
-            <button id="download-pdf" class="no-print w-full mt-6 md:w-auto md:absolute md:top-0 md:right-0 md:mt-0 bg-blue-600 text-white font-semibold py-3 px-4 md:py-2 rounded-lg hover:bg-blue-700 transition">
-                Descargar PDF
-            </button>
+            
+            <div class="header-buttons flex flex-wrap justify-center gap-4 mt-6">
+                <button id="download-pdf" class="no-print w-full md:w-auto bg-blue-600 text-white font-semibold py-3 px-4 md:py-2 rounded-lg hover:bg-blue-700 transition">
+                    Descargar PDF
+                </button>
+                <button id="contact-toggle" class="no-print w-full md:w-auto bg-slate-700 text-white font-semibold py-3 px-4 md:py-2 rounded-lg hover:bg-slate-800 transition">
+                    Contacto Rápido
+                </button>
+            </div>
         </header>
 
-        <main id="main-content">
+        <!-- Modal de Contacto Rápido -->
+        <div id="quick-contact" class="no-print fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Contacto Rápido</h3>
+                    <button id="close-contact" class="text-slate-500 hover:text-slate-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="contact-icons flex justify-center gap-8 mb-6">
+                    <a href="mailto:carlosfigueroa98@gmail.com" class="contact-icon email-icon">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/carlos-figueroa" target="_blank" class="contact-icon linkedin-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/51996455875" target="_blank" class="contact-icon whatsapp-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-slate-600 mb-2">Haz clic en un ícono para contactarme directamente</p>
+                    <p class="text-sm text-slate-500">El contacto se abrirá en tu aplicación predeterminada</p>
+                </div>
+            </div>
+        </div>
+
+        <main id="main-content" class="overflow-x-auto">
+            <!-- Indicadores Cuantitativos -->
+            <section class="mb-12">
+                <h2 class="section-title">Resumen Profesional</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="metric-card">
+                        <div class="text-3xl font-bold">27</div>
+                        <div class="text-sm">Proyectos Realizados</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="text-3xl font-bold">25+</div>
+                        <div class="text-sm">Años de Experiencia</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="text-3xl font-bold">25+</div>
+                        <div class="text-sm">Entidades Públicas</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="text-3xl font-bold">8</div>
+                        <div class="text-sm">Áreas Temáticas</div>
+                    </div>
+                </div>
+            </section>
+            
             <!-- Estudios Profesionales -->
             <section id="estudios-profesionales" class="mb-12">
                 <h2 class="section-title">Estudios Profesionales</h2>
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-sm border"><h3 class="font-bold text-lg text-blue-700">Magister en Investigación para el Desarrollo Local</h3><p class="text-slate-600">Universidad Complutense de Madrid, España (2004)</p></div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm border"><h3 class="font-bold text-lg text-blue-700">Licenciado en Economía</h3><p class="text-slate-600">Pontificia Universidad Católica del Perú, Lima (1995)</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border">
+                        <h3 class="font-bold text-lg text-blue-700">Magister en Investigación para el Desarrollo Local</h3>
+                        <p class="text-slate-600">Universidad Complutense de Madrid, España (2004)</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border">
+                        <h3 class="font-bold text-lg text-blue-700">Licenciado en Economía</h3>
+                        <p class="text-slate-600">Pontificia Universidad Católica del Perú, Lima (1995)</p>
+                    </div>
                 </div>
             </section>
             
@@ -118,9 +328,9 @@
                 <h2 class="section-title">Índice de Contenidos</h2>
                 <div class="nav-menu grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     <a href="#skill-gallery-section">Habilidades</a>
+                    <a href="#achievements-section">Logros</a>
                     <a href="#capacitaciones-section">Capacitaciones</a>
-                    <a href="#advanced-filters">Filtros</a>
-                    <a href="#experience-results">Experiencia</a>
+                    <a href="#experience-dashboard">Experiencia</a>
                     <a href="#visualizaciones">Visualizaciones</a>
                     <a href="#timeline-section">Línea de Tiempo</a>
                 </div>
@@ -134,6 +344,14 @@
                 </div>
             </section>
             
+            <!-- Logros Profesionales -->
+            <section id="achievements-section" class="mb-12">
+                <h2 class="section-title">Logros Profesionales Relevantes</h2>
+                <div id="achievements-container" class="space-y-4">
+                     <!-- Achievements will be inserted here by JS -->
+                </div>
+            </section>
+            
             <!-- Capacitaciones -->
             <section id="capacitaciones-section" class="mb-12">
                 <h2 class="section-title">Especialización, Cursos y Seminarios</h2>
@@ -142,91 +360,179 @@
                 </div>
             </section>
 
-            <!-- Filtros -->
-            <section id="advanced-filters" class="no-print mb-12 p-6 bg-white rounded-lg shadow-sm border">
-                <h2 class="section-title !border-blue-300">Filtros</h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div>
-                        <label class="font-bold block mb-2">Sector</label>
-                        <select id="filter-sector" class="p-2 border rounded-md w-full"><option value="">Todo Sector</option></select>
+            <!-- Dashboard de Experiencia -->
+            <section id="experience-dashboard" class="mb-12">
+                <!-- Filtros -->
+                <div id="advanced-filters" class="no-print mb-8 p-6 bg-white rounded-lg shadow-sm border">
+                    <h2 class="section-title !border-blue-300 !mb-6">Explorar Experiencia Profesional</h2>
+                    
+                    <!-- Nuevo filtro de métrica -->
+                    <div class="metric-toggle">
+                        <button id="metric-count" class="active">Mostrar por Servicios</button>
+                        <button id="metric-months">Mostrar por Meses</button>
                     </div>
-                    <div>
-                        <label class="font-bold block mb-2">Área Temática</label>
-                        <select id="filter-area" class="p-2 border rounded-md w-full"><option value="">Toda Área Temática</option></select>
+                    
+                    <div class="mb-4">
+                        <input type="text" id="search-experience" placeholder="Buscar por título, institución o descripción..." 
+                               class="p-2 border rounded-md w-full">
                     </div>
-                    <div>
-                        <label class="font-bold block mb-2">Tipo de Servicio</label>
-                        <select id="filter-service" class="p-2 border rounded-md w-full"><option value="">Todo Tipo de Servicio</option></select>
+                    
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div>
+                            <label class="font-bold block mb-2">Sector</label>
+                            <select id="filter-sector" class="p-2 border rounded-md w-full">
+                                <option value="">Todo Sector</option>
+                                <option value="Público">Público</option>
+                                <option value="Privado">Privado</option>
+                                <option value="Academia">Academia</option>
+                                <option value="Cooperación/ONG">Cooperación/ONG</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-2">Área Temática</label>
+                            <select id="filter-area" class="p-2 border rounded-md w-full">
+                                <option value="">Toda Área Temática</option>
+                                <option value="Desarrollo Social">Desarrollo Social</option>
+                                <option value="Medio Ambiente">Medio Ambiente</option>
+                                <option value="Minería">Minería</option>
+                                <option value="Desarrollo Económico">Desarrollo Económico</option>
+                                <option value="Educación">Educación</option>
+                                <option value="Gobernanza">Gobernanza</option>
+                                <option value="Salud">Salud</option>
+                                <option value="Desarrollo Urbano">Desarrollo Urbano</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-2">Tipo de Servicio</label>
+                            <select id="filter-service" class="p-2 border rounded-md w-full">
+                                <option value="">Todo Tipo de Servicio</option>
+                                <option value="Investigación">Investigación</option>
+                                <option value="Planificación y M&E">Planificación y M&E</option>
+                                <option value="Asesoría">Asesoría</option>
+                                <option value="Evaluación">Evaluación</option>
+                                <option value="Docencia">Docencia</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-2">Tipo de Actividad</label>
+                            <select id="filter-type" class="p-2 border rounded-md w-full">
+                                <option value="">Todo Tipo</option>
+                                <option value="Exp. Sector Público">Exp. Sector Público</option>
+                                <option value="Proyecto/Programa">Proyecto/Programa</option>
+                                <option value="Consultoría">Consultoría</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mt-6">
+                        <button id="reset-filters" class="bg-slate-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-slate-600 transition">
+                            Limpiar Filtros
+                        </button>
+                        <button id="save-filters" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                            Guardar Preferencias
+                        </button>
                     </div>
                 </div>
-                <button id="reset-filters" class="mt-6 bg-slate-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-slate-600 transition">Limpiar Filtros</button>
-            </section>
 
-            <!-- Resultados de Experiencia -->
-            <section id="experience-results" class="mb-12">
-                <h2 class="section-title">Experiencia Profesional (<span id="experience-count"></span> experiencias, <span id="experience-months"></span> meses en total)</h2>
-                <div id="experience-container" class="space-y-4"></div>
+                <!-- Resultados de Experiencia -->
+                <div id="experience-results">
+                    <h3 class="section-title">Resultados (<span id="experience-count">27</span> experiencias, <span id="experience-months">240</span> meses)</h3>
+                    <div id="experience-container" class="space-y-4">
+                        <!-- Experience items will be inserted here by JS -->
+                    </div>
+                </div>
             </section>
             
             <!-- Visualizaciones -->
             <section id="visualizaciones" class="mb-12">
-                <h2 class="section-title">Visualizaciones de Carrera</h2>
+                <h2 class="section-title">Visualizaciones Dinámicas de Carrera</h2>
                 <div class="grid md:grid-cols-2 gap-8 no-print">
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Experiencia por Sector</h3><canvas id="sectorChart"></canvas></div>
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Tipo de Actividad</h3><canvas id="activityTypeChart"></canvas></div>
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Área Temática</h3><canvas id="thematicAreaChart"></canvas></div>
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Tipo de Servicio</h3><canvas id="serviceTypeChart"></canvas></div>
+                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Experiencia por Sector</h3><canvas id="sectorChart" height="250"></canvas></div>
+                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Tipo de Actividad</h3><canvas id="activityTypeChart" height="250"></canvas></div>
+                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Área Temática</h3><canvas id="thematicAreaChart" height="250"></canvas></div>
+                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Tipo de Servicio</h3><canvas id="serviceTypeChart" height="250"></canvas></div>
                 </div>
             </section>
             
-             <!-- Línea de Tiempo -->
+            <!-- Línea de Tiempo -->
             <section id="timeline-section" class="mb-12">
                 <h2 class="section-title">Línea de Tiempo Profesional</h2>
                 <div class="timeline">
                     <!-- Items se insertarán dinámicamente -->
                 </div>
             </section>
+
+            <!-- Contacto -->
+            <footer id="contact-section" class="pt-8 mt-12 border-t-2 border-slate-300">
+                <h2 class="section-title text-center">Contacto</h2>
+                <div class="contact-card">
+                    <div class="contact-icons flex justify-center gap-8">
+                        <a href="mailto:carlosfigueroa98@gmail.com" class="contact-icon email-icon">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/carlos-figueroa" target="_blank" class="contact-icon linkedin-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://wa.me/51996455875" target="_blank" class="contact-icon whatsapp-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <div class="text-center mt-4">
+                        <p class="text-slate-600">Haz clic en un ícono para contactarme directamente</p>
+                    </div>
+                </div>
+            </footer>
         </main>
     </div>
 
     <script>
     // --- DATA STORE ---
     const experienceData = [
-        { id: 1, title: 'Economista Investigador', institution: 'PROMUDEH', start: '1996-04-01', end: '1997-05-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Desarrollo Social', service: 'Investigación' },
-        { id: 2, title: 'Investigador Asociado, Proy. Lucha Pobreza', institution: 'U. del Pacífico / IDRC Canadá', start: '1997-05-01', end: '2000-08-01', type: 'Proyecto/Programa', sector: 'Academia', area: 'Desarrollo Social', service: 'Investigación' },
-        { id: 3, title: 'Gerente M&E, Proy. STEM-TMA', institution: 'IRG / USAID', start: '2003-12-01', end: '2006-08-01', type: 'Proyecto/Programa', sector: 'Cooperación/ONG', area: 'Medio Ambiente', service: 'Planificación y M&E' },
-        { id: 4, title: 'Diseño Sistema Monitoreo, Proy. Camisea', institution: 'GTCI–CAMISEA/MINEM', start: '2007-03-01', end: '2007-09-01', type: 'Consultoría', sector: 'Público', area: 'Minería', service: 'Planificación y M&E' },
-        { id: 5, title: 'Consultor Desarrollo Local', institution: 'Malaga–Webb & Asociados', start: '2007-09-01', end: '2007-12-01', type: 'Consultoría', sector: 'Privado', area: 'Desarrollo Económico', service: 'Asesoría' },
-        { id: 6, title: 'Asesor Viceministro de Minas', institution: 'MINEM', start: '2007-11-01', end: '2009-06-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Minería', service: 'Asesoría' },
-        { id: 7, title: 'Consultor Sr. y Coord. Proy. Sociales', institution: 'METIS GAIA', start: '2009-08-01', end: '2010-07-01', type: 'Consultoría', sector: 'Privado', area: 'Minería', service: 'Asesoría' },
-        { id: 8, title: 'Coord. Planeamiento, Prog. Conservación Bosques', institution: 'MINAM', start: '2010-10-01', end: '2011-11-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Medio Ambiente', service: 'Planificación y M&E' },
-        { id: 9, title: 'Estudio Socio-económico, Proy. “La Zanja”', institution: 'Data&Decisions/Buenaventura', start: '2013-03-01', end: '2013-05-01', type: 'Consultoría', sector: 'Privado', area: 'Minería', service: 'Investigación' },
-        { id: 10, title: 'Línea de Base y Modelo Gestión Turismo Satipo', institution: 'UE–DAS Satipo', start: '2013-08-01', end: '2013-09-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Económico', service: 'Planificación y M&E' },
-        { id: 11, title: 'Evaluación Prog. CARITAS Australia', institution: 'Yupaq/CARITAS Australia', start: '2014-06-01', end: '2014-08-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Social', service: 'Evaluación' },
-        { id: 12, title: 'Caracterización Agricultura Familiar', institution: 'Welt Hunger Hilfe (WHH)', start: '2015-10-01', end: '2015-12-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Económico', service: 'Investigación' },
-        { id: 13, title: 'Metodología Sistematización, Bolsa Trabajo PUCP', institution: 'PUCP', start: '2016-02-01', end: '2016-02-28', type: 'Consultoría', sector: 'Academia', area: 'Educación', service: 'Planificación y M&E' },
-        { id: 14, title: 'Focalización Sistema Agua potable', institution: 'Yupaq / SEDAPAL', start: '2016-12-01', end: '2017-01-01', type: 'Consultoría', sector: 'Público', area: 'Desarrollo Social', service: 'Investigación' },
-        { id: 15, title: 'Evaluación Institutos Educación Superior', institution: 'Yupaq/Caritas Australia', start: '2017-05-01', end: '2017-07-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Educación', service: 'Evaluación' },
-        { id: 16, title: 'Plan Operativo Multianual, Plan Binacional', institution: 'Plan Binacional Perú Ecuador', start: '2017-08-01', end: '2017-09-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Planificación y M&E' },
-        { id: 17, title: 'Grupo Monitoreo Socio ambiental Chilca', institution: 'Fenix Power', start: '2017-08-01', end: '2017-12-01', type: 'Consultoría', sector: 'Privado', area: 'Medio Ambiente', service: 'Planificación y M&E' },
-        { id: 18, title: 'Sistema M&E, Plan Binacional', institution: 'Plan Binacional Perú Ecuador', start: '2018-01-01', end: '2018-03-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Planificación y M&E' },
-        { id: 19, title: 'Docente Curso Gerencia Social', institution: 'U. del Pacífico', start: '2018-03-01', end: '2020-12-01', type: 'Proyecto/Programa', sector: 'Academia', area: 'Educación', service: 'Docencia' },
-        { id: 20, title: 'Diseño Nota Metodológica, Qaliwarma', institution: 'Qaliwarma-MIDIS', start: '2019-03-01', end: '2019-03-31', type: 'Consultoría', sector: 'Público', area: 'Desarrollo Social', service: 'Planificación y M&E' },
-        { id: 21, title: 'Herramienta Monitoreo, Prog. TB', institution: 'Socios en Salud/Fondo Mundial', start: '2019-12-01', end: '2020-02-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Salud', service: 'Planificación y M&E' },
-        { id: 22, title: 'Plan M&E, Lucha Trabajo Forzoso', institution: 'OIT-Ginebra/BRIDGE', start: '2020-04-01', end: '2020-08-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Social', service: 'Planificación y M&E' },
-        { id: 23, title: 'Jefe Proy., Incidencia Oleoducto', institution: 'U. Continental/PETROPERÚ', start: '2021-01-01', end: '2021-11-15', type: 'Proyecto/Programa', sector: 'Privado', area: 'Medio Ambiente', service: 'Asesoría' },
-        { id: 24, title: 'Mapeo Prog. Preventivos PNP', institution: 'MINITER-PERÚ SEGURO 2025', start: '2021-08-01', end: '2022-02-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Investigación' },
-        { id: 25, title: 'Especialista Sr., Estudios Exp. ControLAB', institution: 'BID/CGR', start: '2023-09-01', end: '2024-10-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Investigación' },
-        { id: 26, title: 'Actualización Metodología Oferta Ed. Superior', institution: 'PMESUT-MINEDU', start: '2024-11-01', end: '2025-06-30', type: 'Consultoría', sector: 'Público', area: 'Educación', service: 'Investigación' },
-        { id: 27, title: 'Proyección poblacional Arequipa al 2050', institution: 'WPS', start: '2025-05-01', end: '2025-06-30', type: 'Consultoría', sector: 'Privado', area: 'Desarrollo Urbano', service: 'Investigación' }
+        { id: 1, title: 'Economista Investigador', institution: 'PROMUDEH', start: '1996-04-01', end: '1997-05-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Desarrollo Social', service: 'Investigación', description: 'Investigación en temas de Población y Desarrollo Humano como insumo para políticas ministeriales.' },
+        { id: 2, title: 'Investigador Asociado, Proy. Lucha Pobreza', institution: 'U. del Pacífico / IDRC Canadá', start: '1997-05-01', end: '2000-08-01', type: 'Proyecto/Programa', sector: 'Academia', area: 'Desarrollo Social', service: 'Investigación', description: 'Monitoreo y evaluación del programa de lucha contra la pobreza, generando propuestas de política pública para la reducción de la pobreza y seguridad alimentaria.' },
+        { id: 3, title: 'Gerente M&E, Proy. STEM-TMA', institution: 'IRG / USAID', start: '2003-12-01', end: '2006-08-01', type: 'Proyecto/Programa', sector: 'Cooperación/ONG', area: 'Medio Ambiente', service: 'Planificación y M&E', description: 'Lideré el M&E del proyecto, fortaleciendo la gestión socio-ambiental del Estado y coordinando la elaboración del Plan de Desarrollo Sostenible Concertado de la Bahía de Paracas.' },
+        { id: 4, title: 'Diseño Sistema Monitoreo, Proy. Camisea', institution: 'GTCI–CAMISEA/MINEM', start: '2007-03-01', end: '2007-09-01', type: 'Consultoría', sector: 'Público', area: 'Minería', service: 'Planificación y M&E', description: 'Diseño del sistema de monitoreo para los compromisos sociales asumidos en el marco del Proyecto Camisea.' },
+        { id: 5, title: 'Consultor Desarrollo Local', institution: 'Malaga–Webb & Asociados', start: '2007-09-01', end: '2007-12-01', type: 'Consultoría', sector: 'Privado', area: 'Desarrollo Económico', service: 'Asesoría', description: 'Mapeo de inversión para el desarrollo económico inclusivo y asesoría en estrategias de desarrollo local.' },
+        { id: 6, title: 'Asesor Viceministro de Minas', institution: 'MINEM', start: '2007-11-01', end: '2009-06-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Minería', service: 'Asesoría', description: 'Coordinador del Fondo Minero de Solidaridad con el Pueblo y líder técnico del Grupo de Trabajo Interministerial para la inversión social en zonas mineras.' },
+        { id: 7, title: 'Consultor Sr. y Coord. Proy. Sociales', institution: 'METIS GAIA', start: '2009-08-01', end: '2010-07-01', type: 'Consultoría', sector: 'Privado', area: 'Minería', service: 'Asesoría', description: 'Elaboración de Estudios de Impacto Social y Planes de Inversión Social para el área de influencia de proyectos mineros.' },
+        { id: 8, title: 'Coord. Planeamiento, Prog. Conservación Bosques', institution: 'MINAM', start: '2010-10-01', end: '2011-11-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Medio Ambiente', service: 'Planificación y M&E', description: 'Diseño del Plan Estratégico y procesos para transferencias condicionadas a comunidades nativas del VRAEM para la mitigación del cambio climático.' },
+        { id: 9, title: 'Estudio Socio-económico, Proy. “La Zanja”', institution: 'Data&Decisions/Buenaventura', start: '2013-03-01', end: '2013-05-01', type: 'Consultoría', sector: 'Privado', area: 'Minería', service: 'Investigación', description: 'Análisis socioeconómico de la población en el área de influencia directa del proyecto minero en Cajamarca.' },
+        { id: 10, title: 'Línea de Base y Modelo Gestión Turismo Satipo', institution: 'UE–DAS Satipo', start: '2013-08-01', end: '2013-09-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Económico', service: 'Planificación y M&E', description: 'Creación de la línea de base y diseño del modelo de gestión para el desarrollo estratégico del turismo en la provincia de Satipo.' },
+        { id: 11, title: 'Evaluación Prog. CARITAS Australia', institution: 'Yupaq/CARITAS Australia', start: '2014-06-01', end: '2014-08-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Social', service: 'Evaluación', description: 'Evaluación de desempeño y sistematización de los programas productivos y de desarrollo de CARITAS Australia en Perú.' },
+        { id: 12, title: 'Caracterización Agricultura Familiar', institution: 'Welt Hunger Hilfe (WHH)', start: '2015-10-01', end: '2015-12-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Económico', service: 'Investigación', description: 'Caracterización multisectorial de los integrantes de la agricultura familiar en el Perú para la ONG alemana.' },
+        { id: 13, title: 'Metodología Sistematización, Bolsa Trabajo PUCP', institution: 'PUCP', start: '2016-02-01', end: '2016-02-28', type: 'Consultoría', sector: 'Academia', area: 'Educación', service: 'Planificación y M&E', description: 'Diseño de la metodología para la sistematización del Programa Consejeros de Carrera de la Bolsa de Trabajo de la PUCP.' },
+        { id: 14, title: 'Focalización Sistema Agua potable', institution: 'Yupaq / SEDAPAL', start: '2016-12-01', end: '2017-01-01', type: 'Consultoría', sector: 'Público', area: 'Desarrollo Social', service: 'Investigación', description: 'Focalización y caracterización socioeconómica para la implementación de un sistema de agua potable no convencional en zonas vulnerables de Lima.' },
+        { id: 15, title: 'Evaluación Institutos Educación Superior', institution: 'Yupaq/Caritas Australia', start: '2017-05-01', end: '2017-07-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Educación', service: 'Evaluación', description: 'Sistematización y evaluación cualitativa del desempeño de Institutos de Educación Superior Tecnológica en Lima, Arequipa y San Martín.' },
+        { id: 16, title: 'Plan Operativo Multianual, Plan Binacional', institution: 'Plan Binacional Perú Ecuador', start: '2017-08-01', end: '2017-09-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Planificación y M&E', description: 'Elaboración del Plan Operativo Multianual del Plan de Inversiones productivas y de infraestructura Binacional Perú-Ecuador.' },
+        { id: 17, title: 'Grupo Monitoreo Socio ambiental Chilca', institution: 'Fenix Power', start: '2017-08-01', end: '2017-12-01', type: 'Consultoría', sector: 'Privado', area: 'Medio Ambiente', service: 'Planificación y M&E', description: 'Conformación y puesta en marcha del Grupo de Trabajo de Monitoreo Socio ambiental Comunitario en el distrito de Chilca.' },
+        { id: 18, title: 'Sistema M&E, Plan Binacional', institution: 'Plan Binacional Perú Ecuador', start: '2018-01-01', end: '2018-03-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Planificación y M&E', description: 'Diseño e implementación del sistema de monitoreo y evaluación del Plan Operativo Multianual del Plan Binacional.' },
+        { id: 19, title: 'Docente Curso Gerencia Social', institution: 'U. del Pacífico', start: '2018-03-01', end: '2020-12-01', type: 'Proyecto/Programa', sector: 'Academia', area: 'Educación', service: 'Docencia', description: 'Docente del curso "Gerencia Social Aplicada", enfocado en la formulación, monitoreo y evaluación de proyectos sociales.' },
+        { id: 20, title: 'Diseño Nota Metodológica, Qaliwarma', institution: 'Qaliwarma-MIDIS', start: '2019-03-01', end: '2019-03-31', type: 'Consultoría', sector: 'Público', area: 'Desarrollo Social', service: 'Planificación y M&E', description: 'Diseño de la nota metodológica para la sistematización y validación del Modelo Piloto Junín-Escuelas Sostenibles del programa Qaliwarma.' },
+        { id: 21, title: 'Herramienta Monitoreo, Prog. TB', institution: 'Socios en Salud/Fondo Mundial', start: '2019-12-01', end: '2020-02-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Salud', service: 'Planificación y M&E', description: 'Elaboración de una herramienta de monitoreo para optimizar el sistema de información de los programas de TB en establecimientos penitenciarios.' },
+        { id: 22, title: 'Plan M&E, Lucha Trabajo Forzoso', institution: 'OIT-Ginebra/BRIDGE', start: '2020-04-01', end: '2020-08-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Social', service: 'Planificación y M&E', description: 'Diseño del Plan de Monitoreo y Evaluación del III Plan Nacional de Lucha contra el Trabajo Forzoso en el Perú.' },
+        { id: 23, title: 'Jefe Proy., Incidencia Oleoducto', institution: 'U. Continental/PETROPERÚ', start: '2021-01-01', end: '2021-11-15', type: 'Proyecto/Programa', sector: 'Privado', area: 'Medio Ambiente', service: 'Asesoría', description: 'Lideré el programa de incidencia y articulación gubernamental, capacitando a gobiernos locales y facilitando reuniones con ministerios para el Oleoducto Norperuano.' },
+        { id: 24, title: 'Mapeo Prog. Preventivos PNP', institution: 'MINITER-PERÚ SEGURO 2025', start: '2021-08-01', end: '2022-02-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Investigación', description: 'Mapeo, caracterización y diseño de guías de acción para los Programas Preventivos de la Policía Nacional del Perú.' },
+        { id: 25, title: 'Especialista Sr., Estudios Exp. ControLAB', institution: 'BID/CGR', start: '2023-09-01', end: '2024-10-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Investigación', description: 'Líder de dos estudios experimentales en el Laboratorio de Innovación para evaluar el impacto de herramientas innovadoras en auditorías de control gubernamental.' },
+        { id: 26, title: 'Actualización Metodología Oferta Ed. Superior', institution: 'PMESUT-MINEDU', start: '2024-11-01', end: '2025-06-30', type: 'Consultoría', sector: 'Público', area: 'Educación', service: 'Investigación', description: 'Actualización y validación de la metodología para evaluar la pertinencia de la oferta de educación superior y ajustar la oferta universitaria pública.' },
+        { id: 27, title: 'Proyección poblacional Arequipa al 2050', institution: 'WPS', start: '2025-05-01', end: '2025-06-30', type: 'Consultoría', sector: 'Privado', area: 'Desarrollo Urbano', service: 'Investigación', description: 'Creación del modelo de proyección poblacional distrital y sectorial del Área Metropolitana de Arequipa al 2050.' }
     ];
 
     const skills = [
         'Planificación Estratégica', 'Evaluación de Impacto', 'Gestión Social', 'Análisis de Datos', 
         'Monitoreo y Evaluación', 'R & Stata', 'Políticas Públicas', 'Investigación', 
-        'GenAI', 'Docencia', 'Liderazgo'
+        'GenAI', 'Docencia', 'Liderazgo', 'Visualización de Datos',
+        'Gestión de Proyectos', 'Big Data', 'Machine Learning', 'Comunicación Efectiva'
     ];
     
+    const achievements = [
+        { title: 'Diseño de metodologías adoptadas por el Estado', description: 'Desarrollé y validé sistemas de evaluación para pertinencia educativa (MINEDU), desempeño institucional (CGR) y programas sociales (MINAM, MIDIS), usados como base para decisiones estratégicas nacionales.' },
+        { title: 'Innovación en control gubernamental con IA', description: 'Lideré 2 estudios experimentales en ControLAB (CGR-BID) que replantearon prácticas de Gestión Gubernamental, incorporando herramientas de ciencia de datos que reducen considerablemente el riesgo en la formulación de políticas de Control Específico (2023-2024).' },
+        { title: 'Articulación Estado-poblaciones vulnerables', description: 'Capacité a equipos técnicos de 5 gobiernos locales en diagnóstico social y gestión intersectorial, facilitando 60 reuniones con 12 ministerios para el proyecto del Oleoducto Norperuano (PETROPERÚ/UC, 2021). Resultado: Priorización de planes locales sustentables y gestación de 2 proyectos ministeriales.' },
+        { title: 'Políticas públicas con enfoque intercultural', description: 'Diseñé el esquema de transferencias monetarias condicionadas a comunidades nativas del VRAEM para conservación de bosques (MINAM, 2011), integrado al Programa Nacional de Mitigación del Cambio Climático.' },
+        { title: 'Modelos prospectivos con impacto territorial', description: 'Creé el modelo de proyección poblacional distrital para el Área Metropolitana de Arequipa 2050, adoptado como insumo oficial para planificar inversiones en infraestructura hídrica (WPS, 2025).' },
+        { title: 'Publicaciones influyentes', description: 'Coautor de "Gerencia Social" (7 ediciones), adoptado como texto oficial en maestrías latinoamericanas, capacitando a +300 funcionarios públicos inicialmente. Ganador del Concurso INEI 2012 con propuesta base del Sistema Nacional de Indicadores desde 2014.' },
+        { title: 'Transferencia de capacidades', description: 'Fortalecí competencias técnicas en +15 entidades públicas/privadas, adoptando herramientas de formulación, monitoreo y evaluación con autonomía.' }
+    ];
+
     const trainingData = [
         { title: 'Análisis de Datos Cuantitativos con STATA', hours: 10, institution: 'Software Shop', date: '08/2024' },
         { title: 'Quarto - Diseño de documentos profesionales en RStudio', hours: 9, institution: 'UDEMY', date: '08/2024' },
@@ -237,148 +543,357 @@
         { title: 'Curso Internacional de Evaluación de Programas Sociales', hours: 40, institution: 'J-PAL / U. de Los Andes', date: '07/2010' }
     ];
 
+    let metricType = 'count'; // 'count' o 'months'
+    let chartInstances = {}; // Para almacenar las instancias de los gráficos
+
     document.addEventListener('DOMContentLoaded', () => {
-        const experienceContainer = document.getElementById('experience-container');
-        const experienceCountEl = document.getElementById('experience-count');
-        const experienceMonthsEl = document.getElementById('experience-months');
-        const timelineContainer = document.querySelector('.timeline');
-        const skillGalleryContainer = document.getElementById('skill-gallery-container');
-        const trainingContainer = document.getElementById('training-container');
-        
-        const filterSector = document.getElementById('filter-sector');
-        const filterArea = document.getElementById('filter-area');
-        const filterService = document.getElementById('filter-service');
-        const resetBtn = document.getElementById('reset-filters');
+        // Inicializar componentes
+        renderAllComponents();
+        initEventListeners();
+        createAllCharts();
+    });
 
-        // --- RENDER FUNCTIONS ---
-        const getMonths = (start, end) => {
-            const startDate = new Date(start);
-            const endDate = new Date(end);
-            let months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
-            months -= startDate.getMonth();
-            months += endDate.getMonth();
-            return months <= 0 ? 1 : months + 1;
-        };
-
-        const renderExperience = (data) => {
-            experienceContainer.innerHTML = '';
-            let totalMonths = 0;
-            if (data.length === 0) {
-                experienceContainer.innerHTML = '<p class="text-center text-slate-500">No hay experiencias que coincidan con los filtros.</p>';
-            }
-            data.sort((a, b) => new Date(b.start) - new Date(a.start)).forEach(item => {
-                totalMonths += getMonths(item.start, item.end);
-                const itemEl = document.createElement('div');
-                itemEl.className = 'experience-item';
-                itemEl.innerHTML = `<p class="font-bold">${item.title}</p><p class="text-sm text-slate-600">${item.institution}</p><div class="text-xs mt-2 flex flex-wrap gap-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${item.type}</span><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full">${item.sector}</span><span class="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">${item.area}</span></div>`;
-                experienceContainer.appendChild(itemEl);
-            });
-            experienceCountEl.textContent = data.length;
-            experienceMonthsEl.textContent = totalMonths;
-        };
-
-        const renderTimeline = (data) => {
-            timelineContainer.innerHTML = '';
-            data.sort((a, b) => new Date(b.start) - new Date(a.start)).forEach(item => {
-                const year = new Date(item.start).getFullYear();
-                const itemEl = document.createElement('div');
-                itemEl.className = 'timeline-item';
-                itemEl.innerHTML = `<div class="timeline-dot"></div><p class="font-bold text-sm text-blue-600">${year}</p><div class="p-4 rounded-md bg-white border mt-1"><p class="font-semibold">${item.title}</p><p class="text-sm text-slate-500">${item.institution}</p></div>`;
-                timelineContainer.appendChild(itemEl);
-            });
-        };
-
-        const renderSkillGallery = () => {
-            skills.forEach(skill => {
-                const tag = document.createElement('span');
-                tag.className = 'skill-tag';
-                tag.textContent = skill;
-                skillGalleryContainer.appendChild(tag);
-            });
-        };
-        
-        const renderTraining = () => {
-             trainingData.sort((a, b) => {
-                const dateA = new Date(a.date.split('/').reverse().join('-'));
-                const dateB = new Date(b.date.split('/').reverse().join('-'));
-                return dateB - dateA;
-             }).forEach(item => {
-                const itemEl = document.createElement('div');
-                itemEl.className = 'experience-item';
-                itemEl.innerHTML = `<p class="font-bold">${item.title} (${item.hours}h)</p><p class="text-sm text-slate-600">${item.institution} - ${item.date}</p>`;
-                trainingContainer.appendChild(itemEl);
-            });
-        };
-        
-        // --- FILTERING LOGIC ---
-        const populateFilters = () => {
-            const getUniqueValues = (key) => [...new Set(experienceData.map(item => item[key]))].sort();
-            getUniqueValues('sector').forEach(s => filterSector.innerHTML += `<option value="${s}">${s}</option>`);
-            getUniqueValues('area').forEach(a => filterArea.innerHTML += `<option value="${a}">${a}</option>`);
-            getUniqueValues('service').forEach(s => filterService.innerHTML += `<option value="${s}">${s}</option>`);
-        };
-
-        const applyFilters = () => {
-            let filteredData = [...experienceData];
-            if (filterSector.value) filteredData = filteredData.filter(item => item.sector === filterSector.value);
-            if (filterArea.value) filteredData = filteredData.filter(item => item.area === filterArea.value);
-            if (filterService.value) filteredData = filteredData.filter(item => item.service === filterService.value);
-            renderExperience(filteredData);
-        };
-
-        // --- CHARTING LOGIC ---
-        const getChartData = (key) => {
-            const counts = experienceData.reduce((acc, item) => {
-                const category = item[key];
-                if (!acc[category]) acc[category] = { count: 0, months: 0 };
-                acc[category].count++;
-                acc[category].months += getMonths(item.start, item.end);
-                return acc;
-            }, {});
-            const sortedLabels = Object.keys(counts).sort((a,b) => counts[b].count - counts[a].count);
-            return {
-                labels: sortedLabels,
-                datasets: [{
-                    label: 'Nº de Experiencias',
-                    data: sortedLabels.map(label => counts[label].count),
-                    months: sortedLabels.map(label => counts[label].months),
-                    backgroundColor: chartColors,
-                }]
-            };
-        };
-        
-        const getTooltipCallback = (context) => {
-            const label = context.label || '';
-            const count = context.dataset.data[context.dataIndex];
-            const months = context.dataset.months[context.dataIndex];
-            return `${label}\nNº de Experiencias: ${count}\nDuración Total: ${months} meses`;
-        };
-        
-        const chartColors = ['rgba(59, 130, 246, 0.85)', 'rgba(16, 185, 129, 0.85)', 'rgba(249, 115, 22, 0.85)', 'rgba(139, 92, 246, 0.85)', 'rgba(239, 68, 68, 0.85)', 'rgba(20, 184, 166, 0.85)', 'rgba(236, 72, 153, 0.85)', 'rgba(107, 114, 128, 0.85)'];
-        const commonOptions = { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: getTooltipCallback } } } };
-        
-        new Chart(document.getElementById('sectorChart').getContext('2d'), { type: 'pie', data: getChartData('sector'), options: commonOptions });
-        new Chart(document.getElementById('activityTypeChart').getContext('2d'), { type: 'doughnut', data: getChartData('type'), options: commonOptions });
-        new Chart(document.getElementById('thematicAreaChart').getContext('2d'), { type: 'bar', data: getChartData('area'), options: { ...commonOptions, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: getTooltipCallback } } } } });
-        new Chart(document.getElementById('serviceTypeChart').getContext('2d'), { type: 'pie', data: getChartData('service'), options: commonOptions });
-
-        // --- EVENT LISTENERS ---
-        filterSector.addEventListener('change', applyFilters);
-        filterArea.addEventListener('change', applyFilters);
-        filterService.addEventListener('change', applyFilters);
-        resetBtn.addEventListener('click', () => {
-            filterSector.value = ''; filterArea.value = ''; filterService.value = '';
-            applyFilters();
-        });
-        document.getElementById('download-pdf').addEventListener('click', () => window.print());
-
-        // --- INITIALIZATION ---
-        populateFilters();
+    function renderAllComponents() {
         renderExperience(experienceData);
         renderTimeline(experienceData);
         renderSkillGallery();
         renderTraining();
-    });
+        renderAchievements();
+    }
+
+    function initEventListeners() {
+        const filterSector = document.getElementById('filter-sector');
+        const filterArea = document.getElementById('filter-area');
+        const filterService = document.getElementById('filter-service');
+        const filterType = document.getElementById('filter-type');
+        const searchInput = document.getElementById('search-experience');
+        const resetBtn = document.getElementById('reset-filters');
+        const saveFiltersBtn = document.getElementById('save-filters');
+        const contactToggle = document.getElementById('contact-toggle');
+        const closeContact = document.getElementById('close-contact');
+        const quickContact = document.getElementById('quick-contact');
+        const metricCountBtn = document.getElementById('metric-count');
+        const metricMonthsBtn = document.getElementById('metric-months');
+        
+        // Filtros
+        filterSector.addEventListener('change', applyFilters);
+        filterArea.addEventListener('change', applyFilters);
+        filterService.addEventListener('change', applyFilters);
+        filterType.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', applyFilters);
+        
+        // Botones de métrica
+        metricCountBtn.addEventListener('click', () => {
+            metricType = 'count';
+            metricCountBtn.classList.add('active');
+            metricMonthsBtn.classList.remove('active');
+            applyFilters();
+        });
+        
+        metricMonthsBtn.addEventListener('click', () => {
+            metricType = 'months';
+            metricMonthsBtn.classList.add('active');
+            metricCountBtn.classList.remove('active');
+            applyFilters();
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            filterSector.value = '';
+            filterArea.value = '';
+            filterService.value = '';
+            filterType.value = '';
+            searchInput.value = '';
+            metricType = 'count';
+            metricCountBtn.classList.add('active');
+            metricMonthsBtn.classList.remove('active');
+            applyFilters();
+        });
+        
+        saveFiltersBtn.addEventListener('click', () => {
+            const filters = {
+                sector: filterSector.value,
+                area: filterArea.value,
+                service: filterService.value,
+                type: filterType.value,
+                metric: metricType
+            };
+            localStorage.setItem('cvFilters', JSON.stringify(filters));
+            alert('Preferencias de filtro guardadas');
+        });
+        
+        document.getElementById('download-pdf').addEventListener('click', () => {
+            window.print();
+        });
+        
+        // Contacto rápido
+        contactToggle.addEventListener('click', () => {
+            quickContact.classList.remove('hidden');
+            quickContact.classList.add('flex');
+        });
+        
+        closeContact.addEventListener('click', () => {
+            quickContact.classList.add('hidden');
+            quickContact.classList.remove('flex');
+        });
+        
+        quickContact.addEventListener('click', (e) => {
+            if (e.target === quickContact) {
+                quickContact.classList.add('hidden');
+                quickContact.classList.remove('flex');
+            }
+        });
+    }
+
+    // --- RENDER FUNCTIONS ---
+    function getMonths(start, end) {
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        let months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+        months -= startDate.getMonth();
+        months += endDate.getMonth();
+        return months <= 0 ? 1 : months + 1;
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('es-ES', { month: 'short', year: 'numeric' });
+    }
+
+    function renderExperience(data) {
+        const experienceContainer = document.getElementById('experience-container');
+        const experienceCountEl = document.getElementById('experience-count');
+        const experienceMonthsEl = document.getElementById('experience-months');
+        
+        experienceContainer.innerHTML = '';
+        let totalMonths = 0;
+        
+        if (data.length === 0) {
+            experienceContainer.innerHTML = '<p class="text-center text-slate-500">No hay experiencias que coincidan con los filtros.</p>';
+        }
+        
+        data.sort((a, b) => new Date(b.start) - new Date(a.start)).forEach(item => {
+            totalMonths += getMonths(item.start, item.end);
+            const itemEl = document.createElement('div');
+            itemEl.className = 'experience-item';
+            itemEl.id = `experience-${item.id}`;
+            
+            const duration = getMonths(item.start, item.end);
+            const durationText = metricType === 'count' 
+                ? '' 
+                : `<span class="text-sm text-slate-500">(${duration} meses)</span>`;
+            
+            itemEl.innerHTML = `
+                <p class="font-bold">${item.title} <span class="font-normal text-sm text-slate-500">(${formatDate(item.start)} - ${formatDate(item.end)})</span> ${durationText}</p>
+                <p class="text-sm text-slate-600 font-semibold">${item.institution}</p>
+                <p class="mt-2 text-sm">${item.description}</p>
+                <div class="text-xs mt-3 flex flex-wrap gap-2">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${item.type}</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full">${item.sector}</span>
+                    <span class="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">${item.area}</span>
+                    <span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">${item.service}</span>
+                </div>
+            `;
+            experienceContainer.appendChild(itemEl);
+        });
+        
+        experienceCountEl.textContent = data.length;
+        experienceMonthsEl.textContent = totalMonths;
+    }
+    
+    function renderAchievements() {
+        const achievementsContainer = document.getElementById('achievements-container');
+        achievementsContainer.innerHTML = '';
+        
+        achievements.forEach(item => {
+            const itemEl = document.createElement('div');
+            itemEl.className = 'achievement-item';
+            itemEl.innerHTML = `<h3 class="font-bold text-blue-700">${item.title}</h3><p class="mt-1 text-sm">${item.description}</p>`;
+            achievementsContainer.appendChild(itemEl);
+        });
+    }
+
+    function renderTimeline(data) {
+        const timelineContainer = document.querySelector('.timeline');
+        timelineContainer.innerHTML = '';
+        
+        data.sort((a, b) => new Date(b.start) - new Date(a.start)).forEach(item => {
+            const year = new Date(item.start).getFullYear();
+            const itemEl = document.createElement('div');
+            itemEl.className = 'timeline-item';
+            itemEl.innerHTML = `<div class="timeline-dot"></div><p class="font-bold text-sm text-blue-600">${year}</p><div class="p-4 rounded-md bg-white border mt-1"><p class="font-semibold">${item.title}</p><p class="text-sm text-slate-500">${item.institution}</p></div>`;
+            
+            // Hacer clicable
+            itemEl.addEventListener('click', () => {
+                document.getElementById(`experience-${item.id}`).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // Destacar temporalmente
+                const expItem = document.getElementById(`experience-${item.id}`);
+                expItem.classList.add('highlight');
+                setTimeout(() => expItem.classList.remove('highlight'), 2000);
+            });
+            
+            timelineContainer.appendChild(itemEl);
+        });
+    }
+
+    function renderSkillGallery() {
+        const skillGalleryContainer = document.getElementById('skill-gallery-container');
+        skillGalleryContainer.innerHTML = '';
+        
+        skills.forEach(skill => {
+            const tag = document.createElement('span');
+            tag.className = 'skill-tag';
+            tag.textContent = skill;
+            skillGalleryContainer.appendChild(tag);
+        });
+    }
+    
+    function renderTraining() {
+        const trainingContainer = document.getElementById('training-container');
+        trainingContainer.innerHTML = '';
+        
+        trainingData.sort((a, b) => {
+            const dateA = new Date(a.date.split('/').reverse().join('-'));
+            const dateB = new Date(b.date.split('/').reverse().join('-'));
+            return dateB - dateA;
+        }).forEach(item => {
+            const itemEl = document.createElement('div');
+            itemEl.className = 'experience-item';
+            itemEl.innerHTML = `<p class="font-bold">${item.title} <span class="font-normal">(${item.hours}h)</span></p><p class="text-sm text-slate-600">${item.institution} - ${item.date}</p>`;
+            trainingContainer.appendChild(itemEl);
+        });
+    }
+    
+    // --- FILTERING LOGIC ---
+    function applyFilters() {
+        const filterSector = document.getElementById('filter-sector').value;
+        const filterArea = document.getElementById('filter-area').value;
+        const filterService = document.getElementById('filter-service').value;
+        const filterType = document.getElementById('filter-type').value;
+        const searchTerm = document.getElementById('search-experience').value.toLowerCase();
+        
+        let filteredData = [...experienceData];
+        
+        // Aplicar filtros
+        if (filterSector) filteredData = filteredData.filter(item => item.sector === filterSector);
+        if (filterArea) filteredData = filteredData.filter(item => item.area === filterArea);
+        if (filterService) filteredData = filteredData.filter(item => item.service === filterService);
+        if (filterType) filteredData = filteredData.filter(item => item.type === filterType);
+        
+        // Aplicar búsqueda
+        if (searchTerm) {
+            filteredData = filteredData.filter(item => 
+                item.title.toLowerCase().includes(searchTerm) ||
+                item.institution.toLowerCase().includes(searchTerm) ||
+                item.description.toLowerCase().includes(searchTerm)
+            );
+        }
+        
+        // Actualizar UI
+        renderExperience(filteredData);
+        updateCharts(filteredData);
+    }
+
+    // --- CHARTING LOGIC ---
+    function createAllCharts() {
+        createChart('sectorChart', 'pie', 'sector', experienceData);
+        createChart('activityTypeChart', 'doughnut', 'type', experienceData);
+        createChart('thematicAreaChart', 'bar', 'area', experienceData, { indexAxis: 'y' });
+        createChart('serviceTypeChart', 'pie', 'service', experienceData);
+    }
+    
+    function updateCharts(data) {
+        createChart('sectorChart', 'pie', 'sector', data);
+        createChart('activityTypeChart', 'doughnut', 'type', data);
+        createChart('thematicAreaChart', 'bar', 'area', data, { indexAxis: 'y' });
+        createChart('serviceTypeChart', 'pie', 'service', data);
+    }
+
+    function createChart(id, type, key, data, extraOptions = {}) {
+        const ctx = document.getElementById(id).getContext('2d');
+        
+        // Destruir el gráfico anterior si existe
+        if (chartInstances[id]) {
+            chartInstances[id].destroy();
+        }
+        
+        // Obtener datos para el gráfico
+        const chartData = getChartData(data, key);
+        
+        const chartColors = [
+            'rgba(59, 130, 246, 0.85)', 
+            'rgba(16, 185, 129, 0.85)', 
+            'rgba(249, 115, 22, 0.85)', 
+            'rgba(139, 92, 246, 0.85)', 
+            'rgba(239, 68, 68, 0.85)',
+            'rgba(155, 195, 60, 0.85)',
+            'rgba(80, 200, 220, 0.85)',
+            'rgba(180, 70, 200, 0.85)'
+        ];
+        
+        const options = {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { 
+                legend: { 
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            if (metricType === 'months') {
+                                return `${label}: ${value} meses`;
+                            }
+                            return `${label}: ${value} servicios`;
+                        }
+                    }
+                }
+            },
+            ...extraOptions
+        };
+        
+        chartInstances[id] = new Chart(ctx, {
+            type,
+            data: {
+                labels: chartData.labels,
+                datasets: [{
+                    label: metricType === 'months' ? 'Meses de Experiencia' : 'Nº de Servicios',
+                    data: chartData.data,
+                    backgroundColor: chartColors,
+                }]
+            },
+            options
+        });
+    }
+    
+    function getChartData(data, key) {
+        // Agrupar por la clave (key) y contar meses o servicios
+        const groups = {};
+        data.forEach(item => {
+            const value = item[key];
+            if (!groups[value]) {
+                groups[value] = 0;
+            }
+            if (metricType === 'months') {
+                groups[value] += getMonths(item.start, item.end);
+            } else {
+                groups[value]++;
+            }
+        });
+        
+        // Ordenar por cantidad (mayor a menor)
+        const sortedEntries = Object.entries(groups).sort((a, b) => b[1] - a[1]);
+        
+        return {
+            labels: sortedEntries.map(entry => entry[0]),
+            data: sortedEntries.map(entry => entry[1])
+        };
+    }
     </script>
 </body>
 </html>
