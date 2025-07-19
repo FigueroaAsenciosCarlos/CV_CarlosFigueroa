@@ -28,12 +28,20 @@
         }
         
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--primary);
             color: var(--text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title:hover {
+            color: var(--primary-dark);
         }
         
         .experience-item, .achievement-item {
@@ -42,22 +50,17 @@
             padding: 1rem;
             border-radius: 0.5rem;
             transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            margin-bottom: 0.8rem;
         }
         
         .experience-item:hover, .achievement-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        
-        .experience-item.highlight {
-            border-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         
         .timeline {
             position: relative;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
         }
         
         .timeline::before {
@@ -66,13 +69,13 @@
             top: 0;
             left: 18px;
             height: 100%;
-            width: 4px;
+            width: 3px;
             background: #cbd5e1;
         }
         
         .timeline-item {
             position: relative;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-left: 3rem;
         }
         
@@ -81,10 +84,10 @@
             position: absolute;
             left: 9px;
             top: 5px;
-            height: 20px;
-            width: 20px;
+            height: 18px;
+            width: 18px;
             background: var(--card-bg);
-            border: 4px solid var(--primary);
+            border: 3px solid var(--primary);
             border-radius: 50%;
             z-index: 1;
         }
@@ -95,6 +98,15 @@
             border-radius: 0.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 100%;
+            width: 100%;
         }
         
         .skill-gallery {
@@ -102,17 +114,18 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
         
         .skill-tag {
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 0.5rem;
             background-color: #eef2ff;
             color: #4338ca;
             font-weight: 600;
             transition: transform 0.2s, background-color 0.2s;
             border: 1px solid #c7d2fe;
+            font-size: 0.9rem;
         }
         
         .skill-tag:hover { 
@@ -122,7 +135,7 @@
         
         .nav-menu a {
             display: block;
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 0.8rem;
             background-color: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 0.5rem;
@@ -130,19 +143,20 @@
             font-weight: 600;
             color: var(--primary);
             transition: all 0.2s;
+            font-size: 0.9rem;
         }
         
         .nav-menu a:hover {
             background-color: var(--primary);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .contact-card {
             background-color: #f1f5f9;
             border-radius: 0.75rem;
-            padding: 1.5rem;
+            padding: 1.2rem;
             border: 1px solid var(--border);
             transition: all 0.3s;
         }
@@ -151,30 +165,25 @@
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
             border-radius: 0.75rem;
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .filter-active {
-            border-left: 3px solid var(--primary);
-            padding-left: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .contact-icon {
-            width: 50px;
-            height: 50px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             transition: all 0.3s;
             color: white;
         }
         
         .contact-icon:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         
         .email-icon {
@@ -206,21 +215,71 @@
             border: none;
             cursor: pointer;
             transition: all 0.2s;
+            font-size: 0.9rem;
         }
         
         .metric-toggle button.active {
             background-color: var(--primary);
             color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .section-content {
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+        }
+        
+        .section-content.expanded {
+            max-height: 3000px;
+            opacity: 1;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .bio-section {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .compact-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.8rem;
+        }
+        
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .profile-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.75rem;
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            font-weight: 500;
+            font-size: 0.85rem;
+            border: 1px solid #bae6fd;
         }
         
         @media (max-width: 768px) {
-            .section-title { font-size: 1.3rem; }
+            .section-title { font-size: 1.1rem; }
             .nav-menu { grid-template-columns: repeat(2, 1fr); }
-            .chart-container { margin-bottom: 1.5rem; }
+            .chart-container { margin-bottom: 1rem; }
             .header-buttons { flex-direction: column; gap: 0.5rem; }
-            .contact-icons { flex-direction: column; gap: 1.5rem; }
+            .contact-icons { flex-direction: column; gap: 1.2rem; }
             .metric-toggle { flex-direction: column; }
+            .compact-grid { grid-template-columns: 1fr; }
+            .profile-tags { justify-content: center; }
+            .chart-container { height: 280px; }
         }
         
         @media print {
@@ -235,38 +294,151 @@
             .section-title {
                 color: black;
                 border-color: #999;
-                font-size: 16pt;
+                font-size: 14pt;
             }
             a { text-decoration: none; color: #333; }
+            .section-content {
+                max-height: none !important;
+                opacity: 1 !important;
+                display: block !important;
+            }
+        }
+        
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin: 0 auto 1rem;
+        }
+        
+        .section-anchor {
+            display: block;
+            position: relative;
+            top: -80px;
+            visibility: hidden;
+        }
+        
+        .timeline-item .timeline-content {
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .timeline-item .timeline-content:hover {
+            background-color: #f1f5f9;
+            transform: translateX(5px);
+        }
+        
+        /* Animación para resaltar elementos */
+        @keyframes highlight {
+            0% { background-color: #fffbeb; box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5); }
+            50% { background-color: #fffbeb; box-shadow: 0 0 0 8px rgba(249, 115, 22, 0); }
+            100% { background-color: white; box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+        }
+        
+        .highlighted {
+            animation: highlight 1.5s ease;
+        }
+        
+        .section-highlight {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary);
+        }
+        
+        /* Mejora para gráficos */
+        canvas {
+            max-height: 280px;
+        }
+        
+        .timeline-year-header {
+            position: relative;
+            padding-left: 3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-year-header h3 {
+            position: relative;
+            z-index: 2;
+            background: var(--bg);
+            display: inline-block;
+            padding-right: 1rem;
+        }
+        
+        .timeline-year-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 18px;
+            right: 0;
+            height: 2px;
+            background: #cbd5e1;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        /* Scroll vertical para secciones extensas */
+        #experience-section.expanded {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        #timeline-section-content.expanded {
+            max-height: 500px;
+            overflow-y: auto;
         }
     </style>
 </head>
 <body class="text-slate-800">
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
-        <header class="relative text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Carlos Figueroa Asencios</h1>
-            <p class="mt-2 text-lg text-blue-600 font-medium">Economista especializado en Planificación Estratégica | Gestión Social | Analítica Avanzada de Datos | GenAI</p>
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-6xl">
+        <header class="relative text-center mb-6">
+            <img id="profile-photo" class="profile-photo" src="foto.jpg" alt="Foto de Carlos Figueroa">
             
-            <div class="header-buttons flex flex-wrap justify-center gap-4 mt-6">
-                <button id="download-pdf" class="no-print w-full md:w-auto bg-blue-600 text-white font-semibold py-3 px-4 md:py-2 rounded-lg hover:bg-blue-700 transition">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-1">Carlos Figueroa Asencios</h1>
+            
+            <p class="text-md md:text-lg text-blue-600 font-medium mb-2">Economista</p>
+            
+            <div class="profile-tags">
+                <span class="profile-tag">Planificación Estratégica</span>
+                <span class="profile-tag">Gestión Social</span>
+                <span class="profile-tag">Analítica de Datos</span>
+                <span class="profile-tag">GenAI</span>
+            </div>
+            
+            <div class="header-buttons flex flex-wrap justify-center gap-3 mt-4">
+                <button id="download-pdf" class="no-print w-full md:w-auto bg-blue-600 text-white font-semibold py-2 px-3 md:py-1.5 rounded-lg hover:bg-blue-700 transition text-sm">
                     Descargar PDF
                 </button>
-                <button id="contact-toggle" class="no-print w-full md:w-auto bg-slate-700 text-white font-semibold py-3 px-4 md:py-2 rounded-lg hover:bg-slate-800 transition">
+                <button id="contact-toggle" class="no-print w-full md:w-auto bg-slate-700 text-white font-semibold py-2 px-3 md:py-1.5 rounded-lg hover:bg-slate-800 transition text-sm">
                     Contacto Rápido
                 </button>
             </div>
         </header>
 
+        <!-- Mini Bio -->
+        <section class="bio-section mb-6">
+            <h2 class="text-xl font-bold text-slate-900 mb-3 text-center md:text-left">Perfil Profesional</h2>
+            <p class="text-slate-700 text-sm md:text-base">
+                Economista con más de 25 años de experiencia en planificación estratégica, gestión social y analítica avanzada de datos. 
+                He liderado proyectos de cooperación internacional y asesorado a entidades públicas en políticas públicas y sociales. 
+                Combino innovación metodológica, ciencia de datos y GenAI para diseñar soluciones efectivas y sostenibles. 
+                Sólida trayectoria como consultor, docente e investigador en evaluación de impacto y modelos predictivos.
+            </p>
+        </section>
+
         <!-- Modal de Contacto Rápido -->
         <div id="quick-contact" class="no-print fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xl font-bold">Contacto Rápido</h3>
+            <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold">Contacto Rápido</h3>
                     <button id="close-contact" class="text-slate-500 hover:text-slate-700">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-                <div class="contact-icons flex justify-center gap-8 mb-6">
+                <div class="contact-icons flex justify-center gap-6 mb-4">
                     <a href="mailto:carlosfigueroa98@gmail.com" class="contact-icon email-icon">
                         <i class="fas fa-envelope"></i>
                     </a>
@@ -278,57 +450,42 @@
                     </a>
                 </div>
                 <div class="text-center">
-                    <p class="text-slate-600 mb-2">Haz clic en un ícono para contactarme directamente</p>
-                    <p class="text-sm text-slate-500">El contacto se abrirá en tu aplicación predeterminada</p>
+                    <p class="text-slate-600 mb-2 text-sm">Haz clic en un ícono para contactarme directamente</p>
+                    <p class="text-xs text-slate-500">El contacto se abrirá en tu aplicación predeterminada</p>
                 </div>
             </div>
         </div>
 
         <main id="main-content" class="overflow-x-auto">
             <!-- Indicadores Cuantitativos -->
-            <section class="mb-12">
-                <h2 class="section-title">Resumen Profesional</h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <section class="mb-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 compact-grid">
                     <div class="metric-card">
-                        <div class="text-3xl font-bold">27</div>
-                        <div class="text-sm">Proyectos Realizados</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="text-3xl font-bold">25+</div>
-                        <div class="text-sm">Años de Experiencia</div>
+                        <div class="text-xl font-bold">27</div>
+                        <div class="text-xs">Proyectos</div>
                     </div>
                     <div class="metric-card">
-                        <div class="text-3xl font-bold">25+</div>
-                        <div class="text-sm">Entidades Públicas</div>
+                        <div class="text-xl font-bold">25+</div>
+                        <div class="text-xs">Años Exp.</div>
                     </div>
                     <div class="metric-card">
-                        <div class="text-3xl font-bold">8</div>
-                        <div class="text-sm">Áreas Temáticas</div>
+                        <div class="text-xl font-bold">25+</div>
+                        <div class="text-xs">Entidades</div>
                     </div>
-                </div>
-            </section>
-            
-            <!-- Estudios Profesionales -->
-            <section id="estudios-profesionales" class="mb-12">
-                <h2 class="section-title">Estudios Profesionales</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-sm border">
-                        <h3 class="font-bold text-lg text-blue-700">Magister en Investigación para el Desarrollo Local</h3>
-                        <p class="text-slate-600">Universidad Complutense de Madrid, España (2004)</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm border">
-                        <h3 class="font-bold text-lg text-blue-700">Licenciado en Economía</h3>
-                        <p class="text-slate-600">Pontificia Universidad Católica del Perú, Lima (1995)</p>
+                    <div class="metric-card">
+                        <div class="text-xl font-bold">8</div>
+                        <div class="text-xs">Áreas Temáticas</div>
                     </div>
                 </div>
             </section>
             
             <!-- Menú de Navegación -->
-            <section class="no-print mb-12">
+            <section class="no-print mb-8">
                 <h2 class="section-title">Índice de Contenidos</h2>
-                <div class="nav-menu grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <a href="#skill-gallery-section">Habilidades</a>
-                    <a href="#achievements-section">Logros</a>
+                <div class="nav-menu grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-2">
+                    <a href="#estudios-profesionales">Estudios Profesionales</a>
+                    <a href="#skill-gallery-section">Habilidades Clave</a>
+                    <a href="#achievements-section">Logros Profesionales</a>
                     <a href="#capacitaciones-section">Capacitaciones</a>
                     <a href="#experience-dashboard">Experiencia</a>
                     <a href="#visualizaciones">Visualizaciones</a>
@@ -336,136 +493,221 @@
                 </div>
             </section>
 
+            <!-- Estudios Profesionales -->
+            <section id="estudios-profesionales" class="mb-8">
+                <a id="estudios-profesionales-anchor" class="section-anchor"></a>
+                <h2 class="section-title" onclick="toggleSection('education-section')">
+                    Estudios Profesionales
+                    <i id="education-section-icon" class="fas fa-chevron-down toggle-icon"></i>
+                </h2>
+                <div id="education-section" class="section-content">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-base text-blue-700">Magister en Investigación para el Desarrollo Local</h3>
+                            <p class="text-slate-600 text-sm">Universidad Complutense de Madrid, España (2004)</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border">
+                            <h3 class="font-bold text-base text-blue-700">Licenciado en Economía</h3>
+                            <p class="text-slate-600 text-sm">Pontificia Universidad Católica del Perú, Lima (1995)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
             <!-- Galería de Habilidades -->
-            <section id="skill-gallery-section" class="mb-12">
-                <h2 class="section-title">Habilidades Clave</h2>
-                <div id="skill-gallery-container" class="skill-gallery p-6 bg-white rounded-lg shadow-sm border">
-                    <!-- Skills will be inserted here by JS -->
+            <section id="skill-gallery-section" class="mb-8">
+                <a id="skill-gallery-section-anchor" class="section-anchor"></a>
+                <h2 class="section-title" onclick="toggleSection('skills-section')">
+                    Habilidades Clave
+                    <i id="skills-section-icon" class="fas fa-chevron-down toggle-icon"></i>
+                </h2>
+                <div id="skills-section" class="section-content">
+                    <div id="skill-gallery-container" class="skill-gallery p-4 bg-white rounded-lg shadow-sm border">
+                        <!-- Skills will be inserted here by JS -->
+                    </div>
                 </div>
             </section>
             
             <!-- Logros Profesionales -->
-            <section id="achievements-section" class="mb-12">
-                <h2 class="section-title">Logros Profesionales Relevantes</h2>
-                <div id="achievements-container" class="space-y-4">
-                     <!-- Achievements will be inserted here by JS -->
+            <section id="achievements-section" class="mb-8">
+                <a id="achievements-section-anchor" class="section-anchor"></a>
+                <h2 class="section-title" onclick="toggleSection('achievements-section-content')">
+                    Logros Profesionales
+                    <i id="achievements-section-content-icon" class="fas fa-chevron-down toggle-icon"></i>
+                </h2>
+                <div id="achievements-section-content" class="section-content">
+                    <div id="achievements-container" class="space-y-3"></div>
                 </div>
             </section>
             
             <!-- Capacitaciones -->
-            <section id="capacitaciones-section" class="mb-12">
-                <h2 class="section-title">Especialización, Cursos y Seminarios</h2>
-                <div id="training-container" class="space-y-4">
-                    <!-- Training items will be inserted here by JS -->
+            <section id="capacitaciones-section" class="mb-8">
+                <a id="capacitaciones-section-anchor" class="section-anchor"></a>
+                <h2 class="section-title" onclick="toggleSection('training-section')">
+                    Capacitaciones
+                    <i id="training-section-icon" class="fas fa-chevron-down toggle-icon"></i>
+                </h2>
+                <div id="training-section" class="section-content">
+                    <div id="training-container" class="space-y-3"></div>
                 </div>
             </section>
 
             <!-- Dashboard de Experiencia -->
-            <section id="experience-dashboard" class="mb-12">
+            <section id="experience-dashboard" class="mb-8">
                 <!-- Filtros -->
-                <div id="advanced-filters" class="no-print mb-8 p-6 bg-white rounded-lg shadow-sm border">
-                    <h2 class="section-title !border-blue-300 !mb-6">Explorar Experiencia Profesional</h2>
+                <div id="advanced-filters" class="no-print mb-6 p-4 bg-white rounded-lg shadow-sm border">
+                    <!-- Renombrado a "Filtros" -->
+                    <h2 class="section-title" onclick="toggleSection('filter-section')">
+                        Filtros
+                        <i id="filter-section-icon" class="fas fa-chevron-down toggle-icon"></i>
+                    </h2>
                     
-                    <!-- Nuevo filtro de métrica -->
-                    <div class="metric-toggle">
-                        <button id="metric-count" class="active">Mostrar por Servicios</button>
-                        <button id="metric-months">Mostrar por Meses</button>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <input type="text" id="search-experience" placeholder="Buscar por título, institución o descripción..." 
-                               class="p-2 border rounded-md w-full">
-                    </div>
-                    
-                    <div class="grid md:grid-cols-4 gap-6">
-                        <div>
-                            <label class="font-bold block mb-2">Sector</label>
-                            <select id="filter-sector" class="p-2 border rounded-md w-full">
-                                <option value="">Todo Sector</option>
-                                <option value="Público">Público</option>
-                                <option value="Privado">Privado</option>
-                                <option value="Academia">Academia</option>
-                                <option value="Cooperación/ONG">Cooperación/ONG</option>
-                            </select>
+                    <div id="filter-section" class="section-content">
+                        <div class="metric-toggle">
+                            <button id="metric-count" class="active">Mostrar por Servicios</button>
+                            <button id="metric-months">Mostrar por Meses</button>
                         </div>
-                        <div>
-                            <label class="font-bold block mb-2">Área Temática</label>
-                            <select id="filter-area" class="p-2 border rounded-md w-full">
-                                <option value="">Toda Área Temática</option>
-                                <option value="Desarrollo Social">Desarrollo Social</option>
-                                <option value="Medio Ambiente">Medio Ambiente</option>
-                                <option value="Minería">Minería</option>
-                                <option value="Desarrollo Económico">Desarrollo Económico</option>
-                                <option value="Educación">Educación</option>
-                                <option value="Gobernanza">Gobernanza</option>
-                                <option value="Salud">Salud</option>
-                                <option value="Desarrollo Urbano">Desarrollo Urbano</option>
-                            </select>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 mb-3">
+                            <div>
+                                <label class="font-bold block mb-1 text-sm">Fecha de inicio</label>
+                                <input type="date" id="filter-start-date" class="p-2 border rounded-md w-full text-sm">
+                            </div>
+                            <div>
+                                <label class="font-bold block mb-1 text-sm">Fecha de fin</label>
+                                <input type="date" id="filter-end-date" class="p-2 border rounded-md w-full text-sm">
+                            </div>
                         </div>
-                        <div>
-                            <label class="font-bold block mb-2">Tipo de Servicio</label>
-                            <select id="filter-service" class="p-2 border rounded-md w-full">
-                                <option value="">Todo Tipo de Servicio</option>
-                                <option value="Investigación">Investigación</option>
-                                <option value="Planificación y M&E">Planificación y M&E</option>
-                                <option value="Asesoría">Asesoría</option>
-                                <option value="Evaluación">Evaluación</option>
-                                <option value="Docencia">Docencia</option>
-                            </select>
+                        
+                        <div class="mb-3">
+                            <input type="text" id="search-experience" placeholder="Buscar por título, institución o descripción..." 
+                                   class="p-2 border rounded-md w-full text-sm">
                         </div>
-                        <div>
-                            <label class="font-bold block mb-2">Tipo de Actividad</label>
-                            <select id="filter-type" class="p-2 border rounded-md w-full">
-                                <option value="">Todo Tipo</option>
-                                <option value="Exp. Sector Público">Exp. Sector Público</option>
-                                <option value="Proyecto/Programa">Proyecto/Programa</option>
-                                <option value="Consultoría">Consultoría</option>
-                            </select>
+                        
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="font-bold block mb-1 text-sm">Sector</label>
+                                <select id="filter-sector" class="p-2 border rounded-md w-full text-sm">
+                                    <option value="">Todo Sector</option>
+                                    <option value="Público">Público</option>
+                                    <option value="Privado">Privado</option>
+                                    <option value="Academia">Academia</option>
+                                    <option value="Cooperación/ONG">Cooperación/ONG</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="font-bold block mb-1 text-sm">Área Temática</label>
+                                <select id="filter-area" class="p-2 border rounded-md w-full text-sm">
+                                    <option value="">Toda Área Temática</option>
+                                    <option value="Desarrollo Social">Desarrollo Social</option>
+                                    <option value="Medio Ambiente">Medio Ambiente</option>
+                                    <option value="Minería">Minería</option>
+                                    <option value="Desarrollo Económico">Desarrollo Económico</option>
+                                    <option value="Educación">Educación</option>
+                                    <option value="Gobernanza">Gobernanza</option>
+                                    <option value="Salud">Salud</option>
+                                    <option value="Desarrollo Urbano">Desarrollo Urbano</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="font-bold block mb-1 text-sm">Tipo de Servicio</label>
+                                <select id="filter-service" class="p-2 border rounded-md w-full text-sm">
+                                    <option value="">Todo Tipo de Servicio</option>
+                                    <option value="Investigación">Investigación</option>
+                                    <option value="Planificación y M&E">Planificación y M&E</option>
+                                    <option value="Asesoría">Asesoría</option>
+                                    <option value="Evaluación">Evaluación</option>
+                                    <option value="Docencia">Docencia</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="font-bold block mb-1 text-sm">Tipo de Actividad</label>
+                                <select id="filter-type" class="p-2 border rounded-md w-full text-sm">
+                                    <option value="">Todo Tipo</option>
+                                    <option value="Exp. Sector Público">Exp. Sector Público</option>
+                                    <option value="Proyecto/Programa">Proyecto/Programa</option>
+                                    <option value="Consultoría">Consultoría</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex gap-4 mt-6">
-                        <button id="reset-filters" class="bg-slate-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-slate-600 transition">
-                            Limpiar Filtros
-                        </button>
-                        <button id="save-filters" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
-                            Guardar Preferencias
-                        </button>
+                        <div class="flex gap-3 mt-4">
+                            <button id="reset-filters" class="bg-slate-500 text-white font-semibold py-1.5 px-3 rounded-lg hover:bg-slate-600 transition text-sm">
+                                Limpiar Filtros
+                            </button>
+                            <button id="save-filters" class="bg-blue-600 text-white font-semibold py-1.5 px-3 rounded-lg hover:bg-blue-700 transition text-sm">
+                                Guardar Preferencias
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Resultados de Experiencia -->
+                <!-- Resultados de Experiencia - Renombrado a "Experiencia" -->
                 <div id="experience-results">
-                    <h3 class="section-title">Resultados (<span id="experience-count">27</span> experiencias, <span id="experience-months">240</span> meses)</h3>
-                    <div id="experience-container" class="space-y-4">
-                        <!-- Experience items will be inserted here by JS -->
+                    <!-- Renombrado a "Experiencia" -->
+                    <h3 class="section-title" onclick="toggleSection('experience-section')">
+                        Experiencia (<span id="experience-count">27</span> servicios, <span id="experience-months">240</span> meses)
+                        <i id="experience-section-icon" class="fas fa-chevron-down toggle-icon"></i>
+                    </h3>
+                    <div id="experience-section" class="section-content">
+                        <div id="experience-container" class="space-y-3"></div>
                     </div>
                 </div>
             </section>
             
             <!-- Visualizaciones -->
-            <section id="visualizaciones" class="mb-12">
-                <h2 class="section-title">Visualizaciones Dinámicas de Carrera</h2>
-                <div class="grid md:grid-cols-2 gap-8 no-print">
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Experiencia por Sector</h3><canvas id="sectorChart" height="250"></canvas></div>
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Tipo de Actividad</h3><canvas id="activityTypeChart" height="250"></canvas></div>
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Área Temática</h3><canvas id="thematicAreaChart" height="250"></canvas></div>
-                    <div class="chart-container"><h3 class="font-bold text-center mb-2">Por Tipo de Servicio</h3><canvas id="serviceTypeChart" height="250"></canvas></div>
+            <section id="visualizaciones" class="mb-8">
+                <a id="visualizaciones-anchor" class="section-anchor"></a>
+                <h2 class="section-title" onclick="toggleSection('charts-section')">
+                    Visualizaciones
+                    <i id="charts-section-icon" class="fas fa-chevron-down toggle-icon"></i>
+                </h2>
+                <div id="charts-section" class="section-content">
+                    <div class="grid md:grid-cols-2 gap-5 no-print">
+                        <div class="chart-container">
+                            <h3 class="font-bold text-center mb-2 text-sm">Experiencia por Sector</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="sectorChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <h3 class="font-bold text-center mb-2 text-sm">Por Tipo de Actividad</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="activityTypeChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <h3 class="font-bold text-center mb-2 text-sm">Por Área Temática</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="thematicAreaChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <h3 class="font-bold text-center mb-2 text-sm">Por Tipo de Servicio</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="serviceTypeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             
             <!-- Línea de Tiempo -->
-            <section id="timeline-section" class="mb-12">
-                <h2 class="section-title">Línea de Tiempo Profesional</h2>
-                <div class="timeline">
-                    <!-- Items se insertarán dinámicamente -->
+            <section id="timeline-section" class="mb-8">
+                <a id="timeline-section-anchor" class="section-anchor"></a>
+                <h2 class="section-title" onclick="toggleSection('timeline-section-content')">
+                    Línea de Tiempo
+                    <i id="timeline-section-content-icon" class="fas fa-chevron-down toggle-icon"></i>
+                </h2>
+                <div id="timeline-section-content" class="section-content">
+                    <div class="timeline"></div>
                 </div>
             </section>
 
             <!-- Contacto -->
-            <footer id="contact-section" class="pt-8 mt-12 border-t-2 border-slate-300">
+            <footer id="contact-section" class="pt-6 mt-8 border-t-2 border-slate-300">
                 <h2 class="section-title text-center">Contacto</h2>
                 <div class="contact-card">
-                    <div class="contact-icons flex justify-center gap-8">
+                    <div class="contact-icons flex justify-center gap-6">
                         <a href="mailto:carlosfigueroa98@gmail.com" class="contact-icon email-icon">
                             <i class="fas fa-envelope"></i>
                         </a>
@@ -476,8 +718,8 @@
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
-                    <div class="text-center mt-4">
-                        <p class="text-slate-600">Haz clic en un ícono para contactarme directamente</p>
+                    <div class="text-center mt-3">
+                        <p class="text-slate-600 text-sm">Haz clic en un ícono para contactarme directamente</p>
                     </div>
                 </div>
             </footer>
@@ -495,7 +737,7 @@
         { id: 6, title: 'Asesor Viceministro de Minas', institution: 'MINEM', start: '2007-11-01', end: '2009-06-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Minería', service: 'Asesoría', description: 'Coordinador del Fondo Minero de Solidaridad con el Pueblo y líder técnico del Grupo de Trabajo Interministerial para la inversión social en zonas mineras.' },
         { id: 7, title: 'Consultor Sr. y Coord. Proy. Sociales', institution: 'METIS GAIA', start: '2009-08-01', end: '2010-07-01', type: 'Consultoría', sector: 'Privado', area: 'Minería', service: 'Asesoría', description: 'Elaboración de Estudios de Impacto Social y Planes de Inversión Social para el área de influencia de proyectos mineros.' },
         { id: 8, title: 'Coord. Planeamiento, Prog. Conservación Bosques', institution: 'MINAM', start: '2010-10-01', end: '2011-11-01', type: 'Exp. Sector Público', sector: 'Público', area: 'Medio Ambiente', service: 'Planificación y M&E', description: 'Diseño del Plan Estratégico y procesos para transferencias condicionadas a comunidades nativas del VRAEM para la mitigación del cambio climático.' },
-        { id: 9, title: 'Estudio Socio-económico, Proy. “La Zanja”', institution: 'Data&Decisions/Buenaventura', start: '2013-03-01', end: '2013-05-01', type: 'Consultoría', sector: 'Privado', area: 'Minería', service: 'Investigación', description: 'Análisis socioeconómico de la población en el área de influencia directa del proyecto minero en Cajamarca.' },
+        { id: 9, title: 'Estudio Socio-económico, Proy. "La Zanja"', institution: 'Data&Decisions/Buenaventura', start: '2013-03-01', end: '2013-05-01', type: 'Consultoría', sector: 'Privado', area: 'Minería', service: 'Investigación', description: 'Análisis socioeconómico de la población en el área de influencia directa del proyecto minero en Cajamarca.' },
         { id: 10, title: 'Línea de Base y Modelo Gestión Turismo Satipo', institution: 'UE–DAS Satipo', start: '2013-08-01', end: '2013-09-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Económico', service: 'Planificación y M&E', description: 'Creación de la línea de base y diseño del modelo de gestión para el desarrollo estratégico del turismo en la provincia de Satipo.' },
         { id: 11, title: 'Evaluación Prog. CARITAS Australia', institution: 'Yupaq/CARITAS Australia', start: '2014-06-01', end: '2014-08-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Social', service: 'Evaluación', description: 'Evaluación de desempeño y sistematización de los programas productivos y de desarrollo de CARITAS Australia en Perú.' },
         { id: 12, title: 'Caracterización Agricultura Familiar', institution: 'Welt Hunger Hilfe (WHH)', start: '2015-10-01', end: '2015-12-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Económico', service: 'Investigación', description: 'Caracterización multisectorial de los integrantes de la agricultura familiar en el Perú para la ONG alemana.' },
@@ -508,12 +750,12 @@
         { id: 19, title: 'Docente Curso Gerencia Social', institution: 'U. del Pacífico', start: '2018-03-01', end: '2020-12-01', type: 'Proyecto/Programa', sector: 'Academia', area: 'Educación', service: 'Docencia', description: 'Docente del curso "Gerencia Social Aplicada", enfocado en la formulación, monitoreo y evaluación de proyectos sociales.' },
         { id: 20, title: 'Diseño Nota Metodológica, Qaliwarma', institution: 'Qaliwarma-MIDIS', start: '2019-03-01', end: '2019-03-31', type: 'Consultoría', sector: 'Público', area: 'Desarrollo Social', service: 'Planificación y M&E', description: 'Diseño de la nota metodológica para la sistematización y validación del Modelo Piloto Junín-Escuelas Sostenibles del programa Qaliwarma.' },
         { id: 21, title: 'Herramienta Monitoreo, Prog. TB', institution: 'Socios en Salud/Fondo Mundial', start: '2019-12-01', end: '2020-02-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Salud', service: 'Planificación y M&E', description: 'Elaboración de una herramienta de monitoreo para optimizar el sistema de información de los programas de TB en establecimientos penitenciarios.' },
-        { id: 22, title: 'Plan M&E, Lucha Trabajo Forzoso', institution: 'OIT-Ginebra/BRIDGE', start: '2020-04-01', end: '2020-08-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Social', service: 'Planificación y M&E', description: 'Diseño del Plan de Monitoreo y Evaluación del III Plan Nacional de Lucha contra el Trabajo Forzoso en el Perú.' },
+        { id: 22, title: 'Diseño del Plan de Monitoreo y Evaluación del III Plan Nacional de Lucha contra el Trabajo Forzoso en el Perú', institution: 'OIT-Ginebra/BRIDGE', start: '2020-04-01', end: '2020-08-01', type: 'Consultoría', sector: 'Cooperación/ONG', area: 'Desarrollo Social', service: 'Planificación y M&E', description: 'Diseño del Plan de Monitoreo y Evaluación del III Plan Nacional de Lucha contra el Trabajo Forzoso en el Perú.' },
         { id: 23, title: 'Jefe Proy., Incidencia Oleoducto', institution: 'U. Continental/PETROPERÚ', start: '2021-01-01', end: '2021-11-15', type: 'Proyecto/Programa', sector: 'Privado', area: 'Medio Ambiente', service: 'Asesoría', description: 'Lideré el programa de incidencia y articulación gubernamental, capacitando a gobiernos locales y facilitando reuniones con ministerios para el Oleoducto Norperuano.' },
         { id: 24, title: 'Mapeo Prog. Preventivos PNP', institution: 'MINITER-PERÚ SEGURO 2025', start: '2021-08-01', end: '2022-02-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Investigación', description: 'Mapeo, caracterización y diseño de guías de acción para los Programas Preventivos de la Policía Nacional del Perú.' },
         { id: 25, title: 'Especialista Sr., Estudios Exp. ControLAB', institution: 'BID/CGR', start: '2023-09-01', end: '2024-10-01', type: 'Consultoría', sector: 'Público', area: 'Gobernanza', service: 'Investigación', description: 'Líder de dos estudios experimentales en el Laboratorio de Innovación para evaluar el impacto de herramientas innovadoras en auditorías de control gubernamental.' },
         { id: 26, title: 'Actualización Metodología Oferta Ed. Superior', institution: 'PMESUT-MINEDU', start: '2024-11-01', end: '2025-06-30', type: 'Consultoría', sector: 'Público', area: 'Educación', service: 'Investigación', description: 'Actualización y validación de la metodología para evaluar la pertinencia de la oferta de educación superior y ajustar la oferta universitaria pública.' },
-        { id: 27, title: 'Proyección poblacional Arequipa al 2050', institution: 'WPS', start: '2025-05-01', end: '2025-06-30', type: 'Consultoría', sector: 'Privado', area: 'Desarrollo Urbano', service: 'Investigación', description: 'Creación del modelo de proyección poblacional distrital y sectorial del Área Metropolitana de Arequipa al 2050.' }
+        { id: 27, title: 'Proyección poblacional Arequipa al 2050', institution: 'WSP', start: '2025-05-01', end: '2025-06-30', type: 'Consultoría', sector: 'Privado', area: 'Desarrollo Urbano', service: 'Investigación', description: 'Creación del modelo de proyección poblacional distrital y sectorial del Área Metropolitana de Arequipa al 2050.' }
     ];
 
     const skills = [
@@ -536,18 +778,28 @@
     const trainingData = [
         { title: 'Análisis de Datos Cuantitativos con STATA', hours: 10, institution: 'Software Shop', date: '08/2024' },
         { title: 'Quarto - Diseño de documentos profesionales en RStudio', hours: 9, institution: 'UDEMY', date: '08/2024' },
-        { title: 'Programa Integral de Especialización en “R” para Ciencia de Datos', hours: 100, institution: 'FYC Services Management Consulting', date: '04/2021' },
+        { title: 'Programa Integral de Especialización en "R" para Ciencia de Datos', hours: 100, institution: 'FYC Services Management Consulting', date: '04/2021' },
         { title: 'Coaching para Docentes Universitarios', hours: 20, institution: 'Universidad del Pacífico', date: '09/2019' },
         { title: 'Gestión de Riesgos en Proyectos de Desarrollo', hours: 30, institution: 'INDES', date: '02/2020' },
         { title: 'Formación de Tutores para Gestión por Resultados (Tutor Certificado)', hours: 240, institution: 'INDES', date: '09/2012' },
         { title: 'Curso Internacional de Evaluación de Programas Sociales', hours: 40, institution: 'J-PAL / U. de Los Andes', date: '07/2010' }
     ];
 
-    let metricType = 'count'; // 'count' o 'months'
-    let chartInstances = {}; // Para almacenar las instancias de los gráficos
+    // Mapeo de secciones para navegación
+    const sectionMap = {
+        'estudios-profesionales': 'education-section',
+        'skill-gallery-section': 'skills-section',
+        'achievements-section': 'achievements-section-content',
+        'capacitaciones-section': 'training-section',
+        'experience-dashboard': 'experience-section',
+        'visualizaciones': 'charts-section',
+        'timeline-section': 'timeline-section-content'
+    };
+
+    let metricType = 'count';
+    let chartInstances = {};
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Inicializar componentes
         renderAllComponents();
         initEventListeners();
         createAllCharts();
@@ -566,6 +818,8 @@
         const filterArea = document.getElementById('filter-area');
         const filterService = document.getElementById('filter-service');
         const filterType = document.getElementById('filter-type');
+        const filterStartDate = document.getElementById('filter-start-date');
+        const filterEndDate = document.getElementById('filter-end-date');
         const searchInput = document.getElementById('search-experience');
         const resetBtn = document.getElementById('reset-filters');
         const saveFiltersBtn = document.getElementById('save-filters');
@@ -580,6 +834,8 @@
         filterArea.addEventListener('change', applyFilters);
         filterService.addEventListener('change', applyFilters);
         filterType.addEventListener('change', applyFilters);
+        filterStartDate.addEventListener('change', applyFilters);
+        filterEndDate.addEventListener('change', applyFilters);
         searchInput.addEventListener('input', applyFilters);
         
         // Botones de métrica
@@ -602,6 +858,8 @@
             filterArea.value = '';
             filterService.value = '';
             filterType.value = '';
+            filterStartDate.value = '';
+            filterEndDate.value = '';
             searchInput.value = '';
             metricType = 'count';
             metricCountBtn.classList.add('active');
@@ -615,6 +873,8 @@
                 area: filterArea.value,
                 service: filterService.value,
                 type: filterType.value,
+                startDate: filterStartDate.value,
+                endDate: filterEndDate.value,
                 metric: metricType
             };
             localStorage.setItem('cvFilters', JSON.stringify(filters));
@@ -642,6 +902,83 @@
                 quickContact.classList.remove('flex');
             }
         });
+        
+        // Navegación suave con apertura de secciones
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.querySelector(`#${targetId}`);
+                
+                if (targetElement) {
+                    const anchor = document.querySelector(`#${targetId}-anchor`);
+                    if (anchor) {
+                        window.scrollTo({
+                            top: anchor.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+
+                    // Expandir la sección correspondiente
+                    const sectionContentId = sectionMap[targetId];
+                    if (sectionContentId) {
+                        const section = document.getElementById(sectionContentId);
+                        const icon = document.getElementById(`${sectionContentId}-icon`);
+                        
+                        if (section && !section.classList.contains('expanded')) {
+                            section.classList.add('expanded');
+                            if (icon) icon.classList.add('expanded');
+                        }
+                    }
+
+                    // Comportamiento especial para Experiencia
+                    if (targetId === 'experience-dashboard') {
+                        // Abrir Filtros
+                        const filterSection = document.getElementById('filter-section');
+                        const filterSectionIcon = document.getElementById('filter-section-icon');
+                        if (filterSection && !filterSection.classList.contains('expanded')) {
+                            filterSection.classList.add('expanded');
+                            if (filterSectionIcon) filterSectionIcon.classList.add('expanded');
+                        }
+                        
+                        // Abrir Experiencia
+                        const experienceSection = document.getElementById('experience-section');
+                        const experienceSectionIcon = document.getElementById('experience-section-icon');
+                        if (experienceSection && !experienceSection.classList.contains('expanded')) {
+                            experienceSection.classList.add('expanded');
+                            if (experienceSectionIcon) experienceSectionIcon.classList.add('expanded');
+                        }
+                    }
+                    
+                    // Comportamiento especial para Visualizaciones
+                    if (targetId === 'visualizaciones') {
+                        // Abrir Filtros
+                        const filterSection = document.getElementById('filter-section');
+                        const filterSectionIcon = document.getElementById('filter-section-icon');
+                        if (filterSection && !filterSection.classList.contains('expanded')) {
+                            filterSection.classList.add('expanded');
+                            if (filterSectionIcon) filterSectionIcon.classList.add('expanded');
+                        }
+                        
+                        // Abrir Visualizaciones
+                        const chartsSection = document.getElementById('charts-section');
+                        const chartsSectionIcon = document.getElementById('charts-section-icon');
+                        if (chartsSection && !chartsSection.classList.contains('expanded')) {
+                            chartsSection.classList.add('expanded');
+                            if (chartsSectionIcon) chartsSectionIcon.classList.add('expanded');
+                        }
+                    }
+                }
+            });
+        });
+    }
+
+    function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        const icon = document.getElementById(`${sectionId}-icon`);
+        
+        section.classList.toggle('expanded');
+        icon.classList.toggle('expanded');
     }
 
     // --- RENDER FUNCTIONS ---
@@ -668,7 +1005,10 @@
         let totalMonths = 0;
         
         if (data.length === 0) {
-            experienceContainer.innerHTML = '<p class="text-center text-slate-500">No hay experiencias que coincidan con los filtros.</p>';
+            experienceContainer.innerHTML = '<p class="text-center text-slate-500 text-sm">No hay experiencias que coincidan con los filtros.</p>';
+            experienceCountEl.textContent = '0';
+            experienceMonthsEl.textContent = '0';
+            return;
         }
         
         data.sort((a, b) => new Date(b.start) - new Date(a.start)).forEach(item => {
@@ -680,17 +1020,17 @@
             const duration = getMonths(item.start, item.end);
             const durationText = metricType === 'count' 
                 ? '' 
-                : `<span class="text-sm text-slate-500">(${duration} meses)</span>`;
+                : `<span class="text-xs text-slate-500 ml-1">(${duration} meses)</span>`;
             
             itemEl.innerHTML = `
-                <p class="font-bold">${item.title} <span class="font-normal text-sm text-slate-500">(${formatDate(item.start)} - ${formatDate(item.end)})</span> ${durationText}</p>
-                <p class="text-sm text-slate-600 font-semibold">${item.institution}</p>
-                <p class="mt-2 text-sm">${item.description}</p>
-                <div class="text-xs mt-3 flex flex-wrap gap-2">
-                    <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${item.type}</span>
-                    <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full">${item.sector}</span>
-                    <span class="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">${item.area}</span>
-                    <span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">${item.service}</span>
+                <p class="font-bold text-sm">${item.title} <span class="font-normal text-xs text-slate-500">(${formatDate(item.start)} - ${formatDate(item.end)})</span> ${durationText}</p>
+                <p class="text-xs text-slate-600 font-semibold mt-1">${item.institution}</p>
+                <p class="mt-1 text-xs">${item.description}</p>
+                <div class="text-2xs mt-2 flex flex-wrap gap-1">
+                    <span class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded-full">${item.type}</span>
+                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded-full">${item.sector}</span>
+                    <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded-full">${item.area}</span>
+                    <span class="bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded-full">${item.service}</span>
                 </div>
             `;
             experienceContainer.appendChild(itemEl);
@@ -707,7 +1047,10 @@
         achievements.forEach(item => {
             const itemEl = document.createElement('div');
             itemEl.className = 'achievement-item';
-            itemEl.innerHTML = `<h3 class="font-bold text-blue-700">${item.title}</h3><p class="mt-1 text-sm">${item.description}</p>`;
+            itemEl.innerHTML = `
+                <h3 class="font-bold text-blue-700 text-sm">${item.title}</h3>
+                <p class="mt-1 text-xs">${item.description}</p>
+            `;
             achievementsContainer.appendChild(itemEl);
         });
     }
@@ -716,26 +1059,64 @@
         const timelineContainer = document.querySelector('.timeline');
         timelineContainer.innerHTML = '';
         
-        data.sort((a, b) => new Date(b.start) - new Date(a.start)).forEach(item => {
+        // Agrupar por año de inicio
+        const groupedByYear = {};
+        data.forEach(item => {
             const year = new Date(item.start).getFullYear();
-            const itemEl = document.createElement('div');
-            itemEl.className = 'timeline-item';
-            itemEl.innerHTML = `<div class="timeline-dot"></div><p class="font-bold text-sm text-blue-600">${year}</p><div class="p-4 rounded-md bg-white border mt-1"><p class="font-semibold">${item.title}</p><p class="text-sm text-slate-500">${item.institution}</p></div>`;
+            if (!groupedByYear[year]) {
+                groupedByYear[year] = [];
+            }
+            groupedByYear[year].push(item);
+        });
+        
+        // Obtener años ordenados (del más reciente al más antiguo)
+        const years = Object.keys(groupedByYear).sort((a, b) => b - a);
+        
+        years.forEach(year => {
+            const yearHeader = document.createElement('div');
+            yearHeader.className = 'timeline-year-header';
+            yearHeader.innerHTML = `<h3 class="font-bold text-lg mb-2">${year}</h3>`;
+            timelineContainer.appendChild(yearHeader);
             
-            // Hacer clicable
-            itemEl.addEventListener('click', () => {
-                document.getElementById(`experience-${item.id}`).scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
+            groupedByYear[year].forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'timeline-item';
+                itemEl.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div class="p-3 rounded-md bg-white border timeline-content">
+                        <p class="font-semibold text-sm">${item.title}</p>
+                        <p class="text-xs text-slate-500">${item.institution}</p>
+                        <p class="text-xs mt-1 text-blue-600">Haz clic para ver detalles</p>
+                    </div>
+                `;
+                
+                const content = itemEl.querySelector('.timeline-content');
+                content.addEventListener('click', () => {
+                    const experienceSection = document.getElementById('experience-section');
+                    if (!experienceSection.classList.contains('expanded')) {
+                        toggleSection('experience-section');
+                        document.getElementById('experience-section-icon').classList.add('expanded');
+                    }
+                    
+                    const targetElement = document.getElementById(`experience-${item.id}`);
+                    if (targetElement) {
+                        setTimeout(() => {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center'
+                            });
+                            
+                            targetElement.classList.add('highlighted');
+                            
+                            setTimeout(() => {
+                                targetElement.classList.remove('highlighted');
+                            }, 2000);
+                        }, 300);
+                    }
                 });
                 
-                // Destacar temporalmente
-                const expItem = document.getElementById(`experience-${item.id}`);
-                expItem.classList.add('highlight');
-                setTimeout(() => expItem.classList.remove('highlight'), 2000);
+                timelineContainer.appendChild(itemEl);
             });
-            
-            timelineContainer.appendChild(itemEl);
         });
     }
 
@@ -762,7 +1143,10 @@
         }).forEach(item => {
             const itemEl = document.createElement('div');
             itemEl.className = 'experience-item';
-            itemEl.innerHTML = `<p class="font-bold">${item.title} <span class="font-normal">(${item.hours}h)</span></p><p class="text-sm text-slate-600">${item.institution} - ${item.date}</p>`;
+            itemEl.innerHTML = `
+                <p class="font-bold text-sm">${item.title} <span class="font-normal">(${item.hours}h)</span></p>
+                <p class="text-xs text-slate-600">${item.institution} - ${item.date}</p>
+            `;
             trainingContainer.appendChild(itemEl);
         });
     }
@@ -773,17 +1157,27 @@
         const filterArea = document.getElementById('filter-area').value;
         const filterService = document.getElementById('filter-service').value;
         const filterType = document.getElementById('filter-type').value;
+        const filterStartDate = document.getElementById('filter-start-date').value;
+        const filterEndDate = document.getElementById('filter-end-date').value;
         const searchTerm = document.getElementById('search-experience').value.toLowerCase();
         
         let filteredData = [...experienceData];
         
-        // Aplicar filtros
         if (filterSector) filteredData = filteredData.filter(item => item.sector === filterSector);
         if (filterArea) filteredData = filteredData.filter(item => item.area === filterArea);
         if (filterService) filteredData = filteredData.filter(item => item.service === filterService);
         if (filterType) filteredData = filteredData.filter(item => item.type === filterType);
         
-        // Aplicar búsqueda
+        if (filterStartDate) {
+            const startDate = new Date(filterStartDate);
+            filteredData = filteredData.filter(item => new Date(item.start) >= startDate);
+        }
+        
+        if (filterEndDate) {
+            const endDate = new Date(filterEndDate);
+            filteredData = filteredData.filter(item => new Date(item.end) <= endDate);
+        }
+        
         if (searchTerm) {
             filteredData = filteredData.filter(item => 
                 item.title.toLowerCase().includes(searchTerm) ||
@@ -792,9 +1186,9 @@
             );
         }
         
-        // Actualizar UI
         renderExperience(filteredData);
         updateCharts(filteredData);
+        renderTimeline(filteredData);
     }
 
     // --- CHARTING LOGIC ---
@@ -815,12 +1209,10 @@
     function createChart(id, type, key, data, extraOptions = {}) {
         const ctx = document.getElementById(id).getContext('2d');
         
-        // Destruir el gráfico anterior si existe
         if (chartInstances[id]) {
             chartInstances[id].destroy();
         }
         
-        // Obtener datos para el gráfico
         const chartData = getChartData(data, key);
         
         const chartColors = [
@@ -836,10 +1228,15 @@
         
         const options = {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             plugins: { 
                 legend: { 
                     position: 'top',
+                    labels: {
+                        font: {
+                            size: 10
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -872,7 +1269,6 @@
     }
     
     function getChartData(data, key) {
-        // Agrupar por la clave (key) y contar meses o servicios
         const groups = {};
         data.forEach(item => {
             const value = item[key];
@@ -886,7 +1282,6 @@
             }
         });
         
-        // Ordenar por cantidad (mayor a menor)
         const sortedEntries = Object.entries(groups).sort((a, b) => b[1] - a[1]);
         
         return {
@@ -894,6 +1289,12 @@
             data: sortedEntries.map(entry => entry[1])
         };
     }
+    
+    // Instrucciones para agregar tu foto
+    console.log("Para agregar tu foto:");
+    console.log("1. Guarda tu imagen como 'foto.jpg' en la misma carpeta que este archivo");
+    console.log("2. Reemplaza la línea: src='https://via.placeholder.com/120'");
+    console.log("3. Con: src='foto.jpg'");
     </script>
 </body>
 </html>
